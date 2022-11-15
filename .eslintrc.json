@@ -1,0 +1,7 @@
+{
+  "extends": "@sapphire",
+  "rules": {
+    "@typescript-eslint/no-base-to-string": 0,
+    "@typescript-eslint/member-ordering": 0
+  }
+}
