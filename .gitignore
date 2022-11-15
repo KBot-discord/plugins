@@ -16,7 +16,7 @@ package-lock.json
 
 ## Env ##
 .env
-src/config.ts
+packages/modules/src/config.ts
 
 ### intellij ###
 .idea/

@@ -2,6 +2,6 @@
   "extends": "@sapphire/ts-config",
   "compilerOptions": {
     "importHelpers": true,
-    "removeComments": true,
+    "noEmitHelpers": true
   },
 }
