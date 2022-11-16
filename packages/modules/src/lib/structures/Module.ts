@@ -4,7 +4,7 @@ import type { Awaitable } from '@sapphire/utilities';
 
 export abstract class Module extends Piece {
 	public readonly fullName: string;
-	public readonly description: string;
+	public readonly description: string | undefined;
 	public readonly detailedDescription: string | undefined;
 
 	public commands: ModuleCommand[] = [];
@@ -30,11 +30,34 @@ export abstract class Module extends Piece {
 }
 
 export interface ModuleOptions extends Piece.Options {
+	/**
+	 * The name of the module
+	 */
 	name: string;
+
+	/**
+	 * The name of the module that will be displayed in error messages
+	 */
 	fullName: string;
-	description: string;
+
+	/**
+	 * A description of the module
+	 */
+	description?: string;
+
+	/**
+	 * A detailed description of the module
+	 */
 	detailedDescription?: string;
+
+	/**
+	 * If the module-enabled check should be skipped or not
+	 */
 	skipModuleCheck?: boolean;
+
+	/**
+	 * If the module command check should be skipped or not
+	 */
 	skipCommandCheck?: boolean;
 }
 

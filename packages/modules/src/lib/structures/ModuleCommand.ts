@@ -25,6 +25,9 @@ export class ModuleCommand<PreParseReturn extends Args = Args, O extends ModuleC
 }
 
 export interface ModuleCommandOptions extends Command.Options {
+	/**
+	 * The module that the command is associated with
+	 */
 	module: keyof Modules;
 }
 
