@@ -1,4 +1,5 @@
 ## Builds ##
+build
 dist
 
 ## Dependencies ##
@@ -18,9 +19,12 @@ package-lock.json
 .env
 packages/modules/src/config.ts
 
-### intellij ###
+## intellij ##
 .idea/
 
 ## Logs ##
 logs
 *.log
+
+## .turbo ##
+.turbo

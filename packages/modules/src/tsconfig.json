@@ -7,5 +7,5 @@
 		"preserveConstEnums": true,
 		"tsBuildInfoFile": "../dist/.tsbuildinfo"
 	},
-	"include": ["./"]
+	"include": ["."]
 }

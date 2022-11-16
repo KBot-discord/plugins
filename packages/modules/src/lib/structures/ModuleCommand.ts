@@ -13,7 +13,7 @@ export class ModuleCommand<PreParseReturn extends Args = Args, O extends ModuleC
 	public constructor(context: PieceContext, options: O) {
 		super(context, {
 			...options,
-			preconditions: ['EnabledModule']
+			preconditions: ['GuildOnly', 'EnabledModule']
 		});
 		this.moduleName = options.module;
 

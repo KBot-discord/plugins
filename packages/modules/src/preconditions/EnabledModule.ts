@@ -12,13 +12,23 @@ export class EnabledModulePrecondition extends Precondition {
 		super(context, { ...options });
 	}
 
-	public override chatInputRun(_interaction: CommandInteraction, command: ChatInputModuleCommand, _context: Precondition.Context) {
+	public override async chatInputRun(interaction: CommandInteraction, command: ChatInputModuleCommand, _context: Precondition.Context) {
 		const module = this.getModule(command.moduleName);
-		return module.isEnabled()
+
+		if (module.skipModuleCheck || !(await module.isModuleEnabled(interaction.guildId!))) {
+			return this.error({
+				identifier: Identifiers.ModuleDisabled,
+				message: `[${module.fullName ?? module.name}] The module for this command is disabled.`
+			});
+		}
+
+		if (module.skipModuleCheck) return this.ok();
+
+		return (await module.isModuleCommandEnabled(command, interaction.guildId!))
 			? this.ok()
 			: this.error({
 					identifier: Identifiers.ModuleDisabled,
-					message: `[${module.fullName ?? module.name}] The module for this command is disabled.`
+					message: `[${module.fullName ?? module.name}] This command is not enabled.`
 			  });
 	}
 
