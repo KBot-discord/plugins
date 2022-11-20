@@ -1,37 +1,52 @@
-import type { Args, PieceContext } from '@sapphire/framework';
+import { Command, container } from '@sapphire/framework';
 import type { CacheType } from 'discord.js';
-import { Command } from '@sapphire/framework';
-import { isNullish } from '@sapphire/utilities';
-import type { Modules } from '../types/Module';
+import type { Modules, ModuleStore } from './ModuleStore';
+import type { Module } from './Module';
 
-export class ModuleCommand<PreParseReturn extends Args = Args, O extends ModuleCommand.Options = ModuleCommand.Options> extends Command<
-	PreParseReturn,
-	O
-> {
-	public readonly moduleName: keyof Modules;
+export abstract class ModuleCommand<T extends Module = Module> extends Command {
+	private readonly moduleStore: ModuleStore;
+	private readonly moduleName: keyof Modules;
 
-	public constructor(context: PieceContext, options: O) {
-		super(context, {
-			...options,
-			preconditions: ['GuildOnly', 'EnabledModule']
-		});
-		this.moduleName = options.module;
+	public readonly disabledMessage: string | undefined;
 
-		const store = this.container.stores.get('modules');
-		const module = store.get(this.moduleName);
-		if (isNullish(module)) throw Error('Module not found.');
-		module.addCommand(this);
+	public constructor(context: ModuleCommand.Context, options: ModuleCommand.Options) {
+		const store = container.stores.get('modules');
+		const module = store.get(options.module) as T;
+
+		if (module.config?.commands?.options) {
+			super(context, { ...module.config.commands.options, ...options });
+		} else {
+			super(context, { ...options });
+		}
+
+		this.moduleStore = store;
+		this.moduleName = module.name as keyof Modules;
+		this.disabledMessage = options.disabledMessage;
+	}
+
+	public get module(): T {
+		const module = this.moduleStore.get(this.moduleName);
+		if (!module) {
+			throw Error('Module not found');
+		}
+		return module as T;
 	}
 }
 
 export interface ModuleCommandOptions extends Command.Options {
 	/**
-	 * The module that the command is associated with
+	 * The module that this command is associated with
 	 */
 	module: keyof Modules;
+
+	/**
+	 * The message that will be shown to the user if module for the command is disabled
+	 * @default "[{@link Module.fullName}] The module for this command is disabled."
+	 */
+	disabledMessage?: string;
 }
 
-export type ChatInputModuleCommand = ModuleCommand & Required<Pick<ModuleCommand, 'chatInputRun'>>;
+export type ChatInputModuleCommand<T extends Module = Module> = ModuleCommand<T> & Required<Pick<ModuleCommand<T>, 'chatInputRun'>>;
 
 export namespace ModuleCommand {
 	export type Options = ModuleCommandOptions;

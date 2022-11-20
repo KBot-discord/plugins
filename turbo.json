@@ -8,10 +8,6 @@
     "lint": {
       "dependsOn": ["^build"],
       "outputs": []
-    },
-    "check-update": {
-      "dependsOn": [],
-      "outputs": []
     }
   }
 }

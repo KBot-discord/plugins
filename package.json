@@ -1,14 +1,14 @@
 {
-	"name": "root-plugins",
+	"name": "kbot-plugins",
 	"private": true,
 	"workspaces": [
-		"packages/*"
+		"packages/*",
+		"examples/*"
 	],
 	"scripts": {
-		"build": "turbo run build",
-		"test": "turbo run test",
-		"lint": "turbo run lint",
-		"dev": "turbo run dev"
+		"build": "turbo run build --no-daemon",
+		"test": "turbo run test --no-daemon",
+		"lint": "turbo run lint --no-daemon"
 	},
 	"devDependencies": {
 		"@sapphire/eslint-config": "^4.3.8",
@@ -20,6 +20,7 @@
 		"@types/node": "^18.11.9",
 		"@typescript-eslint/eslint-plugin": "^5.43.0",
 		"@typescript-eslint/parser": "^5.43.0",
+		"discord-api-types": "^0.33.5",
 		"discord.js": "^13.12.0",
 		"eslint": "^8.27.0",
 		"eslint-config-prettier": "^8.5.0",
@@ -30,7 +31,7 @@
 		"prettier": "^2.7.1",
 		"tslib": "^2.4.1",
 		"turbo": "^1.6.3",
-		"typescript": "^4.8.4"
+		"typescript": "^4.9.3"
 	},
 	"lint-staged": {
 		"*.{mjs,ts,js}": [
@@ -39,5 +40,5 @@
 		]
 	},
 	"prettier": "@sapphire/prettier-config",
-	"packageManager": "yarn@3.2.4"
+	"packageManager": "yarn@3.3.0"
 }
