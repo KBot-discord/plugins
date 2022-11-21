@@ -1,4 +1,4 @@
-import { Store } from '@sapphire/pieces';
+import { Store } from '@sapphire/framework';
 import { Module } from './Module';
 
 export class ModuleStore extends Store<Module> {

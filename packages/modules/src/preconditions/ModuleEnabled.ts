@@ -1,7 +1,7 @@
 import { Precondition, Result } from '@sapphire/framework';
 import { ModuleEvents } from '../lib/types/Events';
 import { ModuleIdentifiers } from '../lib/errors/ModuleIdentifiers';
-import type { Piece } from '@sapphire/pieces';
+import type { Piece } from '@sapphire/framework';
 import type { ChatInputModuleCommand } from '../lib/structures/ModuleCommand';
 import type { CommandInteraction } from 'discord.js';
 
