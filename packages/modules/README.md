@@ -16,7 +16,7 @@ is registered to a module will have access to that module, and by extension any 
 ## Installation
 
 ```bash
-npm install @kbot/plugin-modules @sapphire/framework discord.js
+npm install @kbotdev/plugin-modules @sapphire/framework discord.js
 ```
 
 ## Examples
@@ -29,14 +29,14 @@ Modules are loaded from the `modules` directory.
 ### Registering the plugin
 
 ```typescript
-import '@kbot/plugin-modules/register';
+import '@kbotdev/plugin-modules/register';
 ```
 
 ### Creating a module
 
 ```typescript
 // modules/ExampleModule.ts
-import { Module, type ModuleOptions } from '@kbot/plugin-modules';
+import { Module, type ModuleOptions } from '@kbotdev/plugin-modules';
 
 export class ExampleModule extends Module {
 	public constructor(context: Module.Context, options: Module.Options) {
@@ -50,7 +50,7 @@ export class ExampleModule extends Module {
 }
 
 // Register the module name
-declare module '@kbot/plugin-modules' {
+declare module '@kbotdev/plugin-modules' {
 	interface Modules {
 		exampleModule: never;
 	}
@@ -60,7 +60,7 @@ declare module '@kbot/plugin-modules' {
 ### Creating a command for the module
 
 ```typescript
-import { ModuleCommand } from '@kbot/plugin-modules';
+import { ModuleCommand } from '@kbotdev/plugin-modules';
 import type { ChatInputCommand } from '@sapphire/framework';
 
 export class ExampleCommand extends ModuleCommand<ExampleModule> {
