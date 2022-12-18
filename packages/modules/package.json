@@ -56,7 +56,7 @@
     "build": "tsc -b src && yarn esm:register && yarn esm:default",
     "esm:register": "gen-esm-wrapper dist/register.js dist/register.mjs",
     "esm:default": "gen-esm-wrapper dist/index.js dist/index.mjs",
-    "docs": "typedoc --entryPointStrategy packages ."
+    "docs": "typedoc --entryPointStrategy packages --out ../../docs/modules ."
   },
   "packageManager": "yarn@3.2.4"
 }

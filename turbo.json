@@ -8,6 +8,10 @@
     "lint": {
       "dependsOn": ["^build"],
       "outputs": []
+    },
+    "docs": {
+      "dependsOn": ["^build"],
+      "outputs": []
     }
   }
 }
