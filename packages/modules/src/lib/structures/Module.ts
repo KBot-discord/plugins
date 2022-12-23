@@ -53,11 +53,6 @@ export abstract class Module<T extends ModuleConfig = ModuleConfig, O extends Mo
 
 export interface ModuleOptions extends Piece.Options {
 	/**
-	 * The name of the module for internal use
-	 */
-	name: string;
-
-	/**
 	 * The name that will be displayed to users
 	 */
 	fullName: string;
