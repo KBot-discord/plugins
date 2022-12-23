@@ -13,11 +13,7 @@ export abstract class ModuleCommand<T extends Module = Module> extends Command {
 		const store = container.stores.get('modules');
 		const module = store.get(options.module) as T;
 
-		if (module.config?.commands?.options) {
-			super(context, { ...module.config.commands.options, ...options });
-		} else {
-			super(context, { ...options });
-		}
+		super(context, { ...module?.config?.commands?.options, ...options });
 
 		this.moduleStore = store;
 		this.moduleName = module.name as keyof Modules;
