@@ -1,6 +1,7 @@
 ## Builds ##
 build
 dist
+coverage
 docs
 
 ## Dependencies ##
