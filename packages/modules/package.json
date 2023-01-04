@@ -2,17 +2,17 @@
   "name": "@kbotdev/plugin-modules",
   "version": "0.1.4",
   "description": "Module plugin for the Sapphire Framework",
-  "author": "Killbasa",
+  "author": "@kbotdev",
   "license": "MIT",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://gitlab.com/kbotdev/kbot-plugins.git",
+    "url": "https://github.com/KBot-discord/plugins.git",
     "directory": "packages/modules"
   },
-  "homepage": "https://gitlab.com/kbotdev/kbot-plugins/-/tree/main/packages/modules",
+  "homepage": "https://github.com/KBot-discord/plugins/tree/main/packages/modules",
   "dependencies": {
     "@sapphire/framework": "^3.1.4",
     "discord.js": "^13.12.0",
