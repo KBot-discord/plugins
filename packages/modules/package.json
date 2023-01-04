@@ -60,5 +60,5 @@
     "esm:default": "gen-esm-wrapper dist/index.js dist/index.mjs",
     "docs": "typedoc ."
   },
-  "packageManager": "yarn@3.2.4"
+  "packageManager": "yarn@3.3.1"
 }

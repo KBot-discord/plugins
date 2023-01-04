@@ -42,5 +42,5 @@
 		]
 	},
 	"prettier": "@sapphire/prettier-config",
-	"packageManager": "yarn@3.3.0"
+	"packageManager": "yarn@3.3.1"
 }
