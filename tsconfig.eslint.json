@@ -1,7 +1,6 @@
 {
 	"extends": "./tsconfig.base.json",
 	"include": [
-		"examples",
 		"packages/**/*.ts",
 		"packages/**/*.mjs",
 		"packages/**/register*.js",

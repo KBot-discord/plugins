@@ -1,6 +1,8 @@
 ## Builds ##
 build
 dist
+coverage
+docs
 
 ## Dependencies ##
 node_modules
