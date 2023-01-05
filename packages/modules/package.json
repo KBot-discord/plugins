@@ -22,8 +22,7 @@
     "@microsoft/tsdoc": "^0.14.2",
     "gen-esm-wrapper": "^1.1.3",
     "typedoc": "^0.23.23",
-    "typescript": "^4.9.4",
-    "vitest": "^0.26.3"
+    "typescript": "^4.9.4"
   },
   "engines": {
     "node": ">=14.x"
@@ -55,10 +54,10 @@
     "lint": "eslint --fix --ext .ts src",
     "format": "prettier --write --loglevel=warn \"src/**/*.{js,ts,json}\"",
     "build": "tsc -b src && yarn esm:register && yarn esm:default",
-    "test": "vitest",
     "esm:register": "gen-esm-wrapper dist/register.js dist/register.mjs",
     "esm:default": "gen-esm-wrapper dist/index.js dist/index.mjs",
-    "docs": "typedoc ."
+    "docs": "typedoc .",
+    "ci:lint": "eslint --fix=false --ext .ts src"
   },
   "packageManager": "yarn@3.3.1"
 }

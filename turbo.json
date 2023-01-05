@@ -13,7 +13,12 @@
       "dependsOn": ["build"],
       "outputs": ["docs/**"]
     },
-    "lint": {}
+    "lint": {},
+    "format": {},
+    "ci:lint": {},
+    "ci:test": {
+      "dependsOn": ["build"],
+      "outputs": ["coverage/**"]
+    }
   }
 }
-
