@@ -1,0 +1,68 @@
+name: CD
+
+on:
+  push:
+    tags:
+      - '@kbotdev/plugin-*@*.*.*'
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+
+    if: ${{ github.repository_owner == 'kbot-discord' && github.ref == 'refs/heads/main' }}
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v3
+
+      - name: Create archive
+        uses: thedoctor0/zip-release@0.6.2
+        with:
+          type: 'zip'
+          filename: 'release.zip'
+
+      - name: Create release
+        uses: ncipollo/release-action@v1.12.0
+        with:
+          artifacts: 'release.zip'
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+  publish:
+    name: Publish
+    runs-on: ubuntu-latest
+
+    if: ${{ github.repository_owner == 'kbot-discord' && github.ref == 'refs/heads/main' }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - package: '@kbotdev/custom-id'
+            folder: 'custom-id'
+          - package: '@kbotdev/menus'
+            folder: 'menus'
+
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v3
+
+      - name: Set up NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: yarn
+
+      - name: Install dependencies
+        run: yarn --immutable
+
+      - name: Run build
+        run: yarn build
+
+      - name: Publish package
+        run: yarn workspace ${{ matrix.package }} npm publish --access public
+        env:
+          YARN_NPM_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
