@@ -6,6 +6,10 @@ on:
       - '@kbotdev/plugin-*@[0-9]+.[0-9]+.[0-9]+'
 
 jobs:
+  echo:
+    steps:
+      run: echo github.repository_owner
+
   release:
     name: Release
     runs-on: ubuntu-latest
