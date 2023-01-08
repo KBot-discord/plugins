@@ -7,6 +7,8 @@ on:
 
 jobs:
   echo:
+    name: Echo
+    runs-on: ubuntu-latest
     steps:
       - run: echo github.repository_owner
 
