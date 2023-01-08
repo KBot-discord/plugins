@@ -8,7 +8,7 @@ on:
 jobs:
   echo:
     steps:
-      run: echo github.repository_owner
+      - run: echo github.repository_owner
 
   release:
     name: Release
