@@ -1,17 +1,16 @@
 name: CD
 
 on:
-  workflow_dispatch:
   push:
     tags:
-      - '**'
+      - '@kbotdev/plugin-*@[0-9]+.[0-9]+.[0-9]+'
 
 jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
 
-    if: ${{ github.repository_owner == 'kbot-discord' && github.ref == 'refs/heads/main' }}
+    if: github.repository_owner == 'kbot-discord'
 
     permissions:
       contents: write
@@ -36,7 +35,7 @@ jobs:
     name: Publish
     runs-on: ubuntu-latest
 
-    if: ${{ github.repository_owner == 'kbot-discord' && github.ref == 'refs/heads/main' }}
+    if: github.repository_owner == 'kbot-discord'
 
     strategy:
       fail-fast: false
