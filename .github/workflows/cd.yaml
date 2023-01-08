@@ -10,7 +10,8 @@ jobs:
     name: Echo
     runs-on: ubuntu-latest
     steps:
-      - run: echo github.repository_owner
+      - name: Echo name
+        run: echo github.repository_owner
 
   release:
     name: Release
