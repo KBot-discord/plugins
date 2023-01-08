@@ -4,7 +4,7 @@ import { join } from 'path';
 import type { Awaitable } from '@sapphire/framework';
 import type { Guild } from 'discord.js';
 import type { ModuleConfig } from '../types/ModuleConfig';
-import type { ChatInputModuleCommand } from './ModuleCommand';
+import type { ChatInputModuleCommand, ModuleCommandInteractionUnion, ModuleCommandUnion } from './ModuleCommand';
 
 export abstract class Module<T extends ModuleConfig = ModuleConfig, O extends Module.Options = Module.Options> extends Piece<O> {
 	private _config: T | undefined;
@@ -18,7 +18,11 @@ export abstract class Module<T extends ModuleConfig = ModuleConfig, O extends Mo
 		this.description = options.description;
 	}
 
-	public isEnabled?(command: ChatInputModuleCommand, guild: Guild | null): Awaitable<boolean | Result<boolean, ModuleError>>;
+	public isEnabled?(
+		guild: Guild | null,
+		interaction: ModuleCommandInteractionUnion,
+		command: ModuleCommandUnion
+	): Awaitable<boolean | Result<boolean, ModuleError>>;
 
 	public setConfig(config: T): T {
 		return (this._config = config);

@@ -9,6 +9,7 @@
       "dependsOn": ["build"],
       "outputs": ["coverage/**"]
     },
+    "test:build": {},
     "docs": {
       "dependsOn": ["build"],
       "outputs": ["docs/**"]

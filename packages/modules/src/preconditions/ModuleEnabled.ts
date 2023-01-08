@@ -2,22 +2,21 @@ import { Precondition, Result } from '@sapphire/framework';
 import { ModuleEvents } from '../lib/types/Events';
 import { ModuleIdentifiers } from '../lib/errors/ModuleIdentifiers';
 import type { Piece } from '@sapphire/framework';
-import type { ChatInputModuleCommand } from '../lib/structures/ModuleCommand';
-import type { CommandInteraction } from 'discord.js';
+import type { ChatInputModuleCommand, ModuleCommandInteractionUnion } from '../lib/structures/ModuleCommand';
 
 export class ModulePrecondition extends Precondition {
 	public constructor(context: Piece.Context, options: Precondition.Options) {
 		super(context, { ...options });
 	}
 
-	public override async chatInputRun(interaction: CommandInteraction, command: ChatInputModuleCommand, _context: Precondition.Context) {
+	public override async chatInputRun(interaction: ModuleCommandInteractionUnion, command: ChatInputModuleCommand, _context: Precondition.Context) {
 		const { client } = this.container;
 		const { module, disabledMessage } = command;
 
 		const result = await Result.fromAsync(async () => {
 			if (module.isEnabled) {
 				client.emit(ModuleEvents.ModuleRun, module, { interaction, command });
-				const data = await module.isEnabled(command, interaction.guild);
+				const data = await module.isEnabled(interaction.guild, interaction, command);
 
 				if (typeof data !== 'boolean' && data.isErr()) {
 					return data;

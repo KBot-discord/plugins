@@ -95,7 +95,9 @@ jobs:
         run: yarn --immutable
 
       - name: Run tests
-        run: yarn test
+        run: |
+          yarn test:build
+          yarn test
 
   #    - name: Save coverage report
   #      uses: actions/upload-artifact@v3
