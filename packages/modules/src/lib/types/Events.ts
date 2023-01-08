@@ -1,4 +1,4 @@
-import type { ModuleCommand } from '../structures/ModuleCommand';
+import type { ModuleCommandInteractionUnion } from '../structures/ModuleCommand';
 import type { Module } from '../structures/Module';
 
 export const ModuleEvents = {
@@ -10,7 +10,7 @@ export const ModuleEvents = {
 };
 
 export interface ModuleBaseContext {
-	interaction: ModuleCommand.ChatInputInteraction;
+	interaction: ModuleCommandInteractionUnion;
 	command: Module.Command;
 }
 
