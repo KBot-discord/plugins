@@ -36,44 +36,77 @@ import '@kbotdev/plugin-modules/register';
 
 ```typescript
 // modules/ExampleModule.ts
-import { Module, type ModuleOptions } from '@kbotdev/plugin-modules';
+import {
+    Module,
+    type IsEnabledContext,
+    type ModuleError
+} from '@kbotdev/plugin-modules';
+import type { Piece, Result } from '@sapphire/framework';
 
 export class ExampleModule extends Module {
-	public constructor(context: Module.Context, options: Module.Options) {
-		super(context, {
-			...options,
-			name: 'exampleModule',
-			fullName: 'Example Module',
-			description: 'An example module'
-		});
-	}
+    public constructor(context: Module.Context, options: Piece.Options) {
+        super(context, {
+            ...options,
+            // The name of the module that a user would see
+            fullName: 'Example Module',
+            description: 'An example module.'
+        });
+    }
+
+    public isEnabled(context: IsEnabledContext): boolean {
+        return true;
+    }
+
+    // Or async
+    public async isEnabled(context: IsEnabledContext): Promise<boolean> {
+        try {
+            await SomethingThatMightError();
+            return true;
+        } catch {
+            return false;
+        }
+    }
+
+    // Or using Result from @sapphire/framework
+    public isEnabled(context: IsEnabledContext): Result<boolean, ModuleError> {
+        return this.ok(true);
+    }
 }
 
-// Register the module name
+// Register the module name as what you put for the class
 declare module '@kbotdev/plugin-modules' {
-	interface Modules {
-		exampleModule: never;
-	}
+    interface Modules {
+        ExampleModule: never;
+    }
 }
 ```
 
 ### Creating a command for the module
 
 ```typescript
+// commands/ExampleCommand.ts
 import { ModuleCommand } from '@kbotdev/plugin-modules';
-import type { ChatInputCommand } from '@sapphire/framework';
+import type { Command } from '@sapphire/framework';
+import type { ExampleModule } from '../modules/ExampleModule'
 
 export class ExampleCommand extends ModuleCommand<ExampleModule> {
-	public constructor(context: ModuleCommand.Context, options: ModuleCommand.Options) {
-		super(context, {
-			...options,
-			module: 'exampleModule'
-		});
-	}
+    public constructor(context: ModuleCommand.Context, options: Command.Options) {
+        super(context, {
+            ...options,
 
-	public async chatInputRun(interaction: ChatInputCommand.Interaction) {
-            // Access the module with
-            const { module } = this;
-	}
+            // Using the same name registered earlier
+            module: 'ExampleModule',
+            description: 'An awesome description.',
+
+            // A precondition that calls the 'isEnabled' function
+            preconditions: ['ModuleEnabled'],
+        });
+    }
+
+    public async chatInputRun(interaction: ModuleCommand.ChatInputCommandInteraction) {
+        // Access the module with
+        const { module } = this;
+        return interaction.reply(module.fullName);
+    }
 }
 ```
