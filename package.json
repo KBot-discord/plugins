@@ -16,13 +16,13 @@
 		"@microsoft/tsdoc": "^0.14.2",
 		"@sapphire/eslint-config": "^4.3.8",
 		"@sapphire/framework": "^4.0.0",
-		"@sapphire/prettier-config": "^1.4.4",
+		"@sapphire/prettier-config": "^1.4.5",
 		"@sapphire/ts-config": "^3.3.4",
 		"@types/node": "^18.11.18",
-		"@typescript-eslint/eslint-plugin": "^5.48.0",
-		"@typescript-eslint/parser": "^5.48.0",
-		"@vitest/coverage-c8": "^0.26.3",
-		"discord-api-types": "^0.37.26",
+		"@typescript-eslint/eslint-plugin": "^5.48.1",
+		"@typescript-eslint/parser": "^5.48.1",
+		"@vitest/coverage-c8": "^0.27.0",
+		"discord-api-types": "^0.37.27",
 		"discord.js": "^14.7.1",
 		"eslint": "^8.31.0",
 		"eslint-config-prettier": "^8.6.0",
@@ -35,7 +35,7 @@
 		"turbo": "^1.6.3",
 		"typedoc": "^0.23.24",
 		"typescript": "^4.9.4",
-		"vitest": "^0.26.3"
+		"vitest": "^0.27.0"
 	},
 	"lint-staged": {
 		"*.{mjs,ts,js}": [

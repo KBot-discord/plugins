@@ -1,5 +1,5 @@
-import type { ModuleCommandInteractionUnion, ModuleCommandUnion } from '../structures/ModuleCommand';
 import type { Module } from '../structures/Module';
+import type { ModuleCommandInteractionUnion, ModuleCommandUnion } from './ModuleCommandTypes';
 
 export const ModuleEvents = {
 	ModuleRun: 'moduleRun' as const,

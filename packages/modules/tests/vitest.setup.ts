@@ -1,5 +1,5 @@
 import { afterAll } from 'vitest';
-import { mockClient } from './mocks/Client';
+import { mockClient } from './mocks/mockClient';
 
 beforeAll(async () => {
 	const moduleStore = mockClient.stores.get('modules');
@@ -7,6 +7,9 @@ beforeAll(async () => {
 
 	const preconditionsStore = mockClient.stores.get('preconditions');
 	await preconditionsStore.load(__dirname, '../dist/preconditions/ModuleEnabled.js');
+
+	const listenerStore = mockClient.stores.get('listeners');
+	await listenerStore.load(__dirname, '../dist/listeners/moduleError.js');
 
 	const commandStore = mockClient.stores.get('commands');
 	await commandStore.load(__dirname, './mocks/dist/commands/MockModuleCommand.js');

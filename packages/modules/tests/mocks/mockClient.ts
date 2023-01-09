@@ -2,6 +2,7 @@ import '../../dist/register';
 import { SapphireClient } from '@sapphire/framework';
 import type { MockModule } from './modules/MockModule';
 import type { ModuleCommand } from '@kbotdev/plugin-modules';
+import type { ModuleEnabledPrecondition } from '../../src/preconditions/ModuleEnabled';
 
 export const mockClient = new SapphireClient({
 	intents: [],
@@ -20,4 +21,9 @@ export function getMockModule() {
 export function getMockModuleCommand() {
 	const store = mockClient.stores.get('commands');
 	return store.get('mockmodulecommand') as ModuleCommand<MockModule>;
+}
+
+export function getModuleEnabledPrecondition() {
+	const store = mockClient.stores.get('preconditions');
+	return store.get('ModuleEnabled') as ModuleEnabledPrecondition;
 }
