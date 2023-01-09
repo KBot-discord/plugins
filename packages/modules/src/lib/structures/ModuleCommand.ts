@@ -1,54 +1,65 @@
 import { Command, container } from '@sapphire/framework';
+import { CommandConfigOptionsStrategy } from '../types/ModuleConfig';
 import type { CacheType } from 'discord.js';
-import type { Modules, ModuleStore } from './ModuleStore';
 import type { Module } from './Module';
+import type { ModuleCommandDeferOptions, ModuleCommandDisabledMessageFunction, ModuleCommandOptions } from '../types/ModuleCommandTypes';
 
 export abstract class ModuleCommand<T extends Module = Module> extends Command {
-	private readonly moduleStore: ModuleStore;
-	private readonly moduleName: keyof Modules;
+	/**
+	 * The {@link Module} that this command is associated with
+	 */
+	public readonly module!: T;
 
-	public readonly disabledMessage: string | undefined;
+	/**
+	 * How the precondition should handle deferrals before {@link Module.isEnabled} is run
+	 */
+	public readonly deferOptions: ModuleCommandDeferOptions | undefined;
 
+	/**
+	 * If the command options from {@link Module.config} should be applied to the command
+	 * @default false
+	 */
+	public readonly applyConfigCommandOptions: boolean | undefined;
+
+	/**
+	 * Constructor for this instance of the {@link ModuleCommand} class
+	 */
 	public constructor(context: ModuleCommand.Context, options: ModuleCommand.Options) {
 		const store = container.stores.get('modules');
-		const module = store.get(options.module) as T;
+		const module = store.get(options.module) as T | undefined;
 
-		super(context, { ...module?.config?.commands?.options, ...options });
-
-		this.moduleStore = store;
-		this.moduleName = module.name as keyof Modules;
-		this.disabledMessage = options.disabledMessage;
-	}
-
-	public get module(): T {
-		const module = this.moduleStore.get(this.moduleName);
 		if (!module) {
-			throw Error('Module not found');
+			container.logger.error(
+				`[Modules Plugin]: There was no module found with the name of "${options.module}" for the command "${context.name}" at "${context.path}". Please check that the module is registering properly.`
+			);
+			return;
 		}
-		return module as T;
+
+		const applyConfigOptions = //
+			module?.config?.commands?.strategy === CommandConfigOptionsStrategy.Global
+				? true
+				: module?.config?.commands?.strategy === CommandConfigOptionsStrategy.None
+				? false
+				: options.applyConfigCommandOptions === true;
+
+		super(
+			context,
+			applyConfigOptions //
+				? { ...module?.config?.commands?.options, ...options }
+				: { ...options }
+		);
+
+		this.module = module;
 	}
-}
-
-export interface ModuleCommandOptions extends Command.Options {
-	/**
-	 * The module that this command is associated with
-	 */
-	module: keyof Modules;
 
 	/**
-	 * The message that will be shown to the user if module for the command is disabled
-	 * @default "[{@link Module.fullName}] The module for this command is disabled."
+	 * The message that will be shown to users if the associated {@link Module} is disabled
 	 */
-	disabledMessage?: string;
+	public disabledMessage: (moduleName: string, commandName: string) => string = ModuleCommand.disabledMessage;
+
+	public static disabledMessage: ModuleCommandDisabledMessageFunction = //
+		(moduleName: string) => `[${moduleName}] The module for this command is disabled.`;
 }
-
-export type ChatInputModuleCommand<M extends Module = Module> = ModuleCommand<M> & Required<Pick<ModuleCommand<M>, 'chatInputRun'>>;
-
-export type ContextMenuModuleCommand<M extends Module = Module> = ModuleCommand<M> & Required<Pick<ModuleCommand<M>, 'contextMenuRun'>>;
-
-export type ModuleCommandUnion<M extends Module = Module> = ChatInputModuleCommand<M> | ContextMenuModuleCommand<M>;
-
-export type ModuleCommandInteractionUnion = ModuleCommand.ChatInputCommandInteraction | ModuleCommand.ContextMenuCommandInteraction;
 
 export namespace ModuleCommand {
 	export type Options = ModuleCommandOptions;
