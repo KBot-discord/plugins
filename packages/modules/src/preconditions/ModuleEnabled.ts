@@ -2,14 +2,30 @@ import { Precondition, Result } from '@sapphire/framework';
 import { ModuleEvents } from '../lib/types/Events';
 import { ModuleIdentifiers } from '../lib/errors/ModuleIdentifiers';
 import type { Piece } from '@sapphire/framework';
-import type { ChatInputModuleCommand, ModuleCommandInteractionUnion } from '../lib/structures/ModuleCommand';
+import type { ChatInputModuleCommand, ContextMenuModuleCommand, ModuleCommandInteractionUnion } from '../lib/structures/ModuleCommand';
 
 export class ModulePrecondition extends Precondition {
 	public constructor(context: Piece.Context, options: Precondition.Options) {
 		super(context, { ...options });
 	}
 
-	public override async chatInputRun(interaction: ModuleCommandInteractionUnion, command: ChatInputModuleCommand, _context: Precondition.Context) {
+	public override async chatInputRun(interaction: ModuleCommandInteractionUnion, command: ChatInputModuleCommand, context: Precondition.Context) {
+		return this.run(interaction, command, context);
+	}
+
+	public override async contextMenuRun(
+		interaction: ModuleCommandInteractionUnion,
+		command: ContextMenuModuleCommand,
+		context: Precondition.Context
+	) {
+		return this.run(interaction, command, context);
+	}
+
+	private async run(
+		interaction: ModuleCommandInteractionUnion,
+		command: ChatInputModuleCommand | ContextMenuModuleCommand,
+		_context: Precondition.Context
+	) {
 		const { client } = this.container;
 		const { module, disabledMessage } = command;
 

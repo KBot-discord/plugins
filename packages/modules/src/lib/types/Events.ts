@@ -1,4 +1,4 @@
-import type { ModuleCommandInteractionUnion } from '../structures/ModuleCommand';
+import type { ModuleCommandInteractionUnion, ModuleCommandUnion } from '../structures/ModuleCommand';
 import type { Module } from '../structures/Module';
 
 export const ModuleEvents = {
@@ -11,7 +11,7 @@ export const ModuleEvents = {
 
 export interface ModuleBaseContext {
 	interaction: ModuleCommandInteractionUnion;
-	command: Module.Command;
+	command: ModuleCommandUnion;
 }
 
 export interface ModuleRunContext extends ModuleBaseContext {}
