@@ -1,6 +1,6 @@
-import type { ChatInputModuleCommand, ModuleCommand } from '@kbotdev/plugin-modules';
 import { describe, test, expect } from 'vitest';
-import { getMockModuleCommand, mockClient } from '../mocks/Client';
+import { getMockModuleCommand, getModuleEnabledPrecondition } from '../mocks/mockClient';
+import type { ChatInputModuleCommand, ModuleCommand } from '@kbotdev/plugin-modules';
 
 describe('ModuleEnabled', () => {
 	let mockCommand: ChatInputModuleCommand;
@@ -11,23 +11,26 @@ describe('ModuleEnabled', () => {
 		mockCommand = getMockModuleCommand() as ChatInputModuleCommand;
 	});
 
-	test('if isEnabled, return ok', async () => {
-		const precondition = mockClient.stores.get('preconditions').get('ModuleEnabled')!;
+	test('GIVEN module has isEnabled RETURN ok', async () => {
+		const precondition = getModuleEnabledPrecondition();
 
 		const result = await precondition.chatInputRun!(mockInteraction, mockCommand, mockContext);
 
-		expect(result.isOk()).toBeTypeOf('boolean');
 		expect(result.isOk()).toBe(true);
 	});
 
-	test('if no isEnabled, return err', async () => {
+	test('GIVEN module has no isEnabled RETURN error', async () => {
 		mockCommand.module.isEnabled = undefined;
 
-		const precondition = mockClient.stores.get('preconditions').get('ModuleEnabled')!;
+		const precondition = getModuleEnabledPrecondition();
 
 		const result = await precondition.chatInputRun!(mockInteraction, mockCommand, mockContext);
+		const resultUnwrapped = result.unwrapErr();
 
-		expect(result.isErr()).toBeTypeOf('boolean');
 		expect(result.isErr()).toBe(true);
+		expect(resultUnwrapped).instanceOf(Error);
+		expect(resultUnwrapped.name).toBe('PreconditionError');
+		expect(resultUnwrapped.message).toBe(`[${mockCommand.module.fullName}] Something went wrong while handling this request.`);
+		expect(resultUnwrapped.identifier).toBe('ModuleEnabled');
 	});
 });
