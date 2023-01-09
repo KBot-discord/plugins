@@ -50,6 +50,8 @@ export abstract class ModuleCommand<T extends Module = Module> extends Command {
 		);
 
 		this.module = module;
+		this.deferOptions = options.deferOptions;
+		this.applyConfigCommandOptions = options.applyConfigCommandOptions;
 	}
 
 	/**
