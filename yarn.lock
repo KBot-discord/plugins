@@ -330,14 +330,14 @@ __metadata:
   resolution: "@kbotdev/plugin-modules@workspace:packages/modules"
   dependencies:
     "@microsoft/tsdoc": ^0.14.2
-    "@sapphire/framework": ^4.0.0
-    "@vitest/coverage-c8": ^0.27.0
+    "@sapphire/framework": ^4.0.1
+    "@vitest/coverage-c8": ^0.27.1
     discord.js: ^14.7.1
     gen-esm-wrapper: ^1.1.3
     tslib: ^2.4.1
     typedoc: ^0.23.24
     typescript: ^4.9.4
-    vitest: ^0.27.0
+    vitest: ^0.27.1
   languageName: unknown
   linkType: soft
 
@@ -347,14 +347,14 @@ __metadata:
   dependencies:
     "@microsoft/tsdoc": ^0.14.2
     "@sapphire/eslint-config": ^4.3.8
-    "@sapphire/framework": ^4.0.0
+    "@sapphire/framework": ^4.0.1
     "@sapphire/prettier-config": ^1.4.5
     "@sapphire/ts-config": ^3.3.4
     "@types/node": ^18.11.18
     "@typescript-eslint/eslint-plugin": ^5.48.1
     "@typescript-eslint/parser": ^5.48.1
-    "@vitest/coverage-c8": ^0.27.0
-    discord-api-types: ^0.37.27
+    "@vitest/coverage-c8": ^0.27.1
+    discord-api-types: ^0.37.28
     discord.js: ^14.7.1
     eslint: ^8.31.0
     eslint-config-prettier: ^8.6.0
@@ -362,12 +362,12 @@ __metadata:
     gen-esm-wrapper: ^1.1.3
     husky: ^8.0.3
     lint-staged: ^13.1.0
-    prettier: ^2.8.2
+    prettier: ^2.8.3
     tslib: ^2.4.1
-    turbo: ^1.6.3
+    turbo: ^1.7.0
     typedoc: ^0.23.24
     typescript: ^4.9.4
-    vitest: ^0.27.0
+    vitest: ^0.27.1
   languageName: unknown
   linkType: soft
 
@@ -475,9 +475,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sapphire/framework@npm:^4.0.0":
-  version: 4.0.0
-  resolution: "@sapphire/framework@npm:4.0.0"
+"@sapphire/framework@npm:^4.0.1":
+  version: 4.0.1
+  resolution: "@sapphire/framework@npm:4.0.1"
   dependencies:
     "@discordjs/builders": ^1.4.0
     "@sapphire/discord-utilities": ^3.0.0
@@ -488,7 +488,7 @@ __metadata:
     "@sapphire/result": ^2.6.0
     "@sapphire/stopwatch": ^1.5.0
     "@sapphire/utilities": ^3.11.0
-  checksum: 228eee392a58a68fdc5f6382bbbafb8b060583450b08b17e6f37c4c6f6b897498db32ac1a2e117ce62f69b7be89892f0def13b97bd097597dd2101ed5d0c05e7
+  checksum: 97cda09441c9911924493e6f3ad3c554713c0383166373af03e2a4acf1f547dfe421eaa52422298ebf1abb847a62e59c53cf74b48d5bb5ad54ba9973fdc3efaf
   languageName: node
   linkType: hard
 
@@ -901,13 +901,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vitest/coverage-c8@npm:^0.27.0":
-  version: 0.27.0
-  resolution: "@vitest/coverage-c8@npm:0.27.0"
+"@vitest/coverage-c8@npm:^0.27.1":
+  version: 0.27.1
+  resolution: "@vitest/coverage-c8@npm:0.27.1"
   dependencies:
     c8: ^7.12.0
-    vitest: 0.27.0
-  checksum: 19632cd22be33d80e17597203d1cf664005b7bafd22b3aac3f4001e2f5f87b5651b0c3f58461e6d568e5d8327f4dcea61e788e1482826971729a5bc0540fe57b
+    vitest: 0.27.1
+  checksum: 3d009c5c948b765113cd5003f52facbdd0629b91daaa14580a91efdb9d4d868718483b60fd291560a9327816ceaffcdf55b31b1696d9107ad48deba52ad38c00
   languageName: node
   linkType: hard
 
@@ -1407,10 +1407,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"discord-api-types@npm:^0.37.27":
-  version: 0.37.27
-  resolution: "discord-api-types@npm:0.37.27"
-  checksum: f3c404db151862871686008a1e7902f22e2147b391840f9184568d5bc54593babac567fed90bd4831a6b793bd84c424172b081af36badbf950ea0e6fcd5d2e8a
+"discord-api-types@npm:^0.37.28":
+  version: 0.37.28
+  resolution: "discord-api-types@npm:0.37.28"
+  checksum: c033b9c82d5ecb3f273d563db578e21e982a35d106cc66e7ea42d7ef0a79817ca43badd3aade8a5ddb491bc8679ed08b1bcccc105e64ecd1ea5a53a11c2b1f8b
   languageName: node
   linkType: hard
 
@@ -2789,6 +2789,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"mlly@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "mlly@npm:1.1.0"
+  dependencies:
+    acorn: ^8.8.1
+    pathe: ^1.0.0
+    pkg-types: ^1.0.1
+    ufo: ^1.0.1
+  checksum: d53147a2f5f83499589c47a00e00df30cbae2e630dfcfdfdeee2b70b49aff6612f2fa13195a1c6268b8f8ecd6064cb9a35febbdf895b2cbfeacdf9a9b3e31493
+  languageName: node
+  linkType: hard
+
 "ms@npm:2.1.2":
   version: 2.1.2
   resolution: "ms@npm:2.1.2"
@@ -3076,7 +3088,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pkg-types@npm:^1.0.0":
+"pkg-types@npm:^1.0.0, pkg-types@npm:^1.0.1":
   version: 1.0.1
   resolution: "pkg-types@npm:1.0.1"
   dependencies:
@@ -3129,6 +3141,15 @@ __metadata:
   bin:
     prettier: bin-prettier.js
   checksum: 740c56c2128d587d656ea1dde9bc9c3503dfc94db4f3ac387259215eeb2e216680bdad9d18a0c9feecc6b42cfa188d6fa777df4c36c1d00cedd4199074fbfbd2
+  languageName: node
+  linkType: hard
+
+"prettier@npm:^2.8.3":
+  version: 2.8.3
+  resolution: "prettier@npm:2.8.3"
+  bin:
+    prettier: bin-prettier.js
+  checksum: 92f2ceb522d454370e02082aa74ad27388672f7cee8975028b59517c069fe643bdc73e322675c8faf2ff173d7a626d1a6389f26b474000308e793aa25fff46e5
   languageName: node
   linkType: hard
 
@@ -3372,6 +3393,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"siginfo@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "siginfo@npm:2.0.0"
+  checksum: 8aa5a98640ca09fe00d74416eca97551b3e42991614a3d1b824b115fc1401543650914f651ab1311518177e4d297e80b953f4cd4cd7ea1eabe824e8f2091de01
+  languageName: node
+  linkType: hard
+
 "signal-exit@npm:^3.0.2, signal-exit@npm:^3.0.7":
   version: 3.0.7
   resolution: "signal-exit@npm:3.0.7"
@@ -3476,6 +3504,13 @@ __metadata:
   dependencies:
     minipass: ^3.1.1
   checksum: fb58f5e46b6923ae67b87ad5ef1c5ab6d427a17db0bead84570c2df3cd50b4ceb880ebdba2d60726588272890bae842a744e1ecce5bd2a2a582fccd5068309eb
+  languageName: node
+  linkType: hard
+
+"stackback@npm:0.0.2":
+  version: 0.0.2
+  resolution: "stackback@npm:0.0.2"
+  checksum: 2d4dc4e64e2db796de4a3c856d5943daccdfa3dd092e452a1ce059c81e9a9c29e0b9badba91b43ef0d5ff5c04ee62feb3bcc559a804e16faf447bac2d883aa99
   languageName: node
   linkType: hard
 
@@ -3702,58 +3737,58 @@ __metadata:
   languageName: node
   linkType: hard
 
-"turbo-darwin-64@npm:1.6.3":
-  version: 1.6.3
-  resolution: "turbo-darwin-64@npm:1.6.3"
+"turbo-darwin-64@npm:1.7.0":
+  version: 1.7.0
+  resolution: "turbo-darwin-64@npm:1.7.0"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"turbo-darwin-arm64@npm:1.6.3":
-  version: 1.6.3
-  resolution: "turbo-darwin-arm64@npm:1.6.3"
+"turbo-darwin-arm64@npm:1.7.0":
+  version: 1.7.0
+  resolution: "turbo-darwin-arm64@npm:1.7.0"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"turbo-linux-64@npm:1.6.3":
-  version: 1.6.3
-  resolution: "turbo-linux-64@npm:1.6.3"
+"turbo-linux-64@npm:1.7.0":
+  version: 1.7.0
+  resolution: "turbo-linux-64@npm:1.7.0"
   conditions: os=linux & cpu=x64
   languageName: node
   linkType: hard
 
-"turbo-linux-arm64@npm:1.6.3":
-  version: 1.6.3
-  resolution: "turbo-linux-arm64@npm:1.6.3"
+"turbo-linux-arm64@npm:1.7.0":
+  version: 1.7.0
+  resolution: "turbo-linux-arm64@npm:1.7.0"
   conditions: os=linux & cpu=arm64
   languageName: node
   linkType: hard
 
-"turbo-windows-64@npm:1.6.3":
-  version: 1.6.3
-  resolution: "turbo-windows-64@npm:1.6.3"
+"turbo-windows-64@npm:1.7.0":
+  version: 1.7.0
+  resolution: "turbo-windows-64@npm:1.7.0"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"turbo-windows-arm64@npm:1.6.3":
-  version: 1.6.3
-  resolution: "turbo-windows-arm64@npm:1.6.3"
+"turbo-windows-arm64@npm:1.7.0":
+  version: 1.7.0
+  resolution: "turbo-windows-arm64@npm:1.7.0"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"turbo@npm:^1.6.3":
-  version: 1.6.3
-  resolution: "turbo@npm:1.6.3"
+"turbo@npm:^1.7.0":
+  version: 1.7.0
+  resolution: "turbo@npm:1.7.0"
   dependencies:
-    turbo-darwin-64: 1.6.3
-    turbo-darwin-arm64: 1.6.3
-    turbo-linux-64: 1.6.3
-    turbo-linux-arm64: 1.6.3
-    turbo-windows-64: 1.6.3
-    turbo-windows-arm64: 1.6.3
+    turbo-darwin-64: 1.7.0
+    turbo-darwin-arm64: 1.7.0
+    turbo-linux-64: 1.7.0
+    turbo-linux-arm64: 1.7.0
+    turbo-windows-64: 1.7.0
+    turbo-windows-arm64: 1.7.0
   dependenciesMeta:
     turbo-darwin-64:
       optional: true
@@ -3769,7 +3804,7 @@ __metadata:
       optional: true
   bin:
     turbo: bin/turbo
-  checksum: 35195f4b7623014c25ba152c11a8cb23e51cbd75dc9266d0656692665f85b28faf3496dea8cecacf52795a917410668124186ffbdcf276325ccc3e11df9e9623
+  checksum: effefebefeb7531bb33205e368b2b3571fee9e8face3530af25126d4162527f105a5fe7777509a99288326be3b6e28953c7ceacab2c2ef74abb0604c8ec9bbe7
   languageName: node
   linkType: hard
 
@@ -3859,7 +3894,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ufo@npm:^1.0.0":
+"ufo@npm:^1.0.0, ufo@npm:^1.0.1":
   version: 1.0.1
   resolution: "ufo@npm:1.0.1"
   checksum: 63024876f21b7cc44267255a8043062046d3215e09212bd682787a13ccf1e0c5d23f7686a7f1bc7ac9f34c7e8a88100af234f42b509db50f17ce638af6ac87cc
@@ -3929,13 +3964,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite-node@npm:0.27.0":
-  version: 0.27.0
-  resolution: "vite-node@npm:0.27.0"
+"vite-node@npm:0.27.1":
+  version: 0.27.1
+  resolution: "vite-node@npm:0.27.1"
   dependencies:
     cac: ^6.7.14
     debug: ^4.3.4
-    mlly: ^1.0.0
+    mlly: ^1.1.0
     pathe: ^0.2.0
     picocolors: ^1.0.0
     source-map: ^0.6.1
@@ -3943,7 +3978,7 @@ __metadata:
     vite: ^3.0.0 || ^4.0.0
   bin:
     vite-node: vite-node.mjs
-  checksum: 946d410750640ad0ab2d41f1a8faed42b3c004dd323532bd3d630d5ce41e0a3f56b03fb955afbfb1165b861488cace7093ad82aeedbadf2f631bf388d9140e9b
+  checksum: 1cd6b40395365e30edaf926b7cfec03230c92a99ee6565c79b3b2ac9b35863843ad2f24536e80c1f816b49fae55e7ab9dabf3a40fe61ea65d4d5e4774b0f60af
   languageName: node
   linkType: hard
 
@@ -3985,9 +4020,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vitest@npm:0.27.0, vitest@npm:^0.27.0":
-  version: 0.27.0
-  resolution: "vitest@npm:0.27.0"
+"vitest@npm:0.27.1, vitest@npm:^0.27.1":
+  version: 0.27.1
+  resolution: "vitest@npm:0.27.1"
   dependencies:
     "@types/chai": ^4.3.4
     "@types/chai-subset": ^1.3.3
@@ -4005,7 +4040,8 @@ __metadata:
     tinypool: ^0.3.0
     tinyspy: ^1.0.2
     vite: ^3.0.0 || ^4.0.0
-    vite-node: 0.27.0
+    vite-node: 0.27.1
+    why-is-node-running: ^2.2.2
   peerDependencies:
     "@edge-runtime/vm": "*"
     "@vitest/browser": "*"
@@ -4025,7 +4061,7 @@ __metadata:
       optional: true
   bin:
     vitest: vitest.mjs
-  checksum: 46e68b74ce691dd95210991338c6ef7498b1f816c26388066f789f803e1b64ab5ea9ab89e9efcf244c1bcd7a76c281a9467d79380ac3506abfd2cd79c72d37e2
+  checksum: 635b83429c74db4b9e10954ffd7eb21c9927fc83ea4c53e935cf2d8d15636b07b7482fa0c9469a32248da6570bdabfee08b9bc3b57d7b2a52861533115f9c8bc
   languageName: node
   linkType: hard
 
@@ -4051,6 +4087,18 @@ __metadata:
   bin:
     node-which: ./bin/node-which
   checksum: 1a5c563d3c1b52d5f893c8b61afe11abc3bab4afac492e8da5bde69d550de701cf9806235f20a47b5c8fa8a1d6a9135841de2596535e998027a54589000e66d1
+  languageName: node
+  linkType: hard
+
+"why-is-node-running@npm:^2.2.2":
+  version: 2.2.2
+  resolution: "why-is-node-running@npm:2.2.2"
+  dependencies:
+    siginfo: ^2.0.0
+    stackback: 0.0.2
+  bin:
+    why-is-node-running: cli.js
+  checksum: 50820428f6a82dfc3cbce661570bcae9b658723217359b6037b67e495255409b4c8bc7931745f5c175df71210450464517cab32b2f7458ac9c40b4925065200a
   languageName: node
   linkType: hard
 
