@@ -14,8 +14,6 @@
   },
   "homepage": "https://github.com/KBot-discord/plugins/tree/main/packages/modules",
   "dependencies": {
-    "@sapphire/framework": "^4.0.1",
-    "discord.js": "^14.7.1",
     "tslib": "^2.4.1"
   },
   "devDependencies": {

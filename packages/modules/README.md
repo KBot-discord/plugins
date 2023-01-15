@@ -5,6 +5,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/KBot-discord/plugins/blob/main/LICENSE)
 
 [![npm](https://img.shields.io/npm/v/@kbotdev/plugin-modules?color=crimson&logo=npm&label=@kbotdev/plugin-modules)](https://www.npmjs.com/package/@kbotdev/plugin-modules)
+[![npm](https://img.shields.io/npm/dt/@kbotdev/plugin-modules?color=crimson&logo=npm)](https://www.npmjs.com/package/@kbotdev/plugin-modules)
 
 </div>
 
