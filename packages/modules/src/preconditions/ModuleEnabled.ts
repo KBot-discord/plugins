@@ -72,6 +72,6 @@ export class ModuleEnabledPrecondition extends Precondition {
 		}
 
 		if (result.unwrap()) return this.ok();
-		return this.error({ message: command.disabledMessage(module.name, command.name) });
+		return this.error({ message: command.disabledMessage(module.fullName, command.name) });
 	}
 }
