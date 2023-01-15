@@ -60,7 +60,7 @@ export abstract class ModuleCommand<T extends Module = Module> extends Command {
 	public disabledMessage: (moduleName: string, commandName: string) => string = ModuleCommand.disabledMessage;
 
 	public static disabledMessage: ModuleCommandDisabledMessageFunction = //
-		(moduleName: string) => `[${moduleName}] The module for this command is disabled.`;
+		(moduleFullName: string) => `[${moduleFullName}] The module for this command is disabled.`;
 }
 
 export namespace ModuleCommand {
