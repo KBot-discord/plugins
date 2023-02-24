@@ -2,6 +2,7 @@ import { describe, test, expect } from 'vitest';
 import { getMockModule } from '../../mocks/mockClient';
 import { Module, ModuleError, ModuleIdentifiers } from '../../../src';
 import { Piece } from '@sapphire/framework';
+import { mockConfig } from '../../mocks/mockConfig';
 
 describe('Module', () => {
 	let module: Module;
@@ -52,20 +53,32 @@ describe('Module', () => {
 	});
 
 	describe('Module config', () => {
+		test('GIVEN no config RETURN the set config', () => {
+			const result = module.setConfig(mockConfig);
+
+			expect(result).toBe(undefined);
+		});
+
+		test('GIVEN a set config RETURN the config', () => {
+			const result = module.getConfig();
+
+			expect(result).toStrictEqual(mockConfig);
+		});
+
 		test('GIVEN invalid config RETURN false', () => {
-			const currentConfig = module?.getConfig();
+			const currentConfig = undefined;
 
-			const result = module?.validateConfig(currentConfig);
+			const result = module.validateConfig(currentConfig);
 
-			expect(result).toStrictEqual(false);
+			expect(result).toBe(false);
 		});
 
 		test('GIVEN valid config RETURN true', () => {
-			const currentConfig = module?.getConfig();
+			const currentConfig = module.getConfig();
 
-			const result = module?.validateConfig(currentConfig);
+			const result = module.validateConfig(currentConfig);
 
-			expect(result).toStrictEqual(true);
+			expect(result).toBe(true);
 		});
 	});
 });
