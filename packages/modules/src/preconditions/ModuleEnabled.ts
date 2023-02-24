@@ -41,7 +41,6 @@ export class ModuleEnabledPrecondition extends Precondition {
 
 		const result = await Result.fromAsync(async () => {
 			if (module.isEnabled) {
-				client.emit(ModuleEvents.ModuleRun, module, { interaction, command });
 				const data = await module.isEnabled({ guild: interaction.guild, interaction, command });
 
 				if (typeof data !== 'boolean' && data.isErr()) {
@@ -50,12 +49,12 @@ export class ModuleEnabledPrecondition extends Precondition {
 
 				const result = typeof data === 'boolean' ? data : data.unwrap();
 
-				client.emit(ModuleEvents.ModuleSuccess, module, { interaction, command, result });
 				return module.ok(result);
 			}
 			client.emit(ModuleEvents.ModuleMissingIsEnabledHandler, module, { interaction, command });
 			return module.error({
 				identifier: ModuleIdentifiers.ModuleMissingIsEnabledHandler,
+				moduleName: module.fullName,
 				message: `The module "${module.fullName}" is missing a "isEnabled" handler.`
 			});
 		});

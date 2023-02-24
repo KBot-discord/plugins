@@ -2,24 +2,24 @@ import type { CommandOptions } from '@sapphire/framework';
 import type { Guild } from 'discord.js';
 
 /**
- * The different strategies for applying the command options in the {@link ModuleConfig}
+ * The different strategies for applying the {@link CommandOptions} in the {@link ModuleConfig}
  */
 export enum CommandConfigOptionsStrategy {
-	/** @param Global If the command options should be applied to every command and ignore the command-specific strategy */
-	Global,
-	/** @param Scoped If the command options should be applied to every command and prioritize the command-specific strategy */
-	Scoped,
-	/** @param None If the command options should be applied to every command */
+	/** @param Overwrite Prioritizes the command options set in the {@link ModuleConfig} */
+	Overwrite,
+	/** @param Default Prioritizes the command options set in {@link ModuleCommandOptions} */
+	Default,
+	/** @param None Ignore the options in {@link ModuleConfig} */
 	None
 }
 
 export interface ModuleConfig {
 	/**
-	 * Options for commands which will use this module {@link ModuleConfig}. Options set on the command itself will be prioritized.
+	 * Options for commands which will use this module.
 	 */
 	commands?: {
 		/**
-		 * How command options should be resolved
+		 * How command options should be resolved.
 		 */
 		strategy?: CommandConfigOptionsStrategy;
 
@@ -28,6 +28,7 @@ export interface ModuleConfig {
 		 */
 		options?: Omit<CommandOptions, 'name'>;
 
+		// TODO: Need to find a way to apply this
 		/**
 		 * The {@link Guild}s where the commands will be registered
 		 */

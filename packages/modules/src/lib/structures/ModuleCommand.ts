@@ -1,5 +1,7 @@
 import { Command, container } from '@sapphire/framework';
 import { CommandConfigOptionsStrategy } from '../types/ModuleConfig';
+import { ModuleError } from '../errors/ModuleError';
+import { ModuleIdentifiers } from '../errors/ModuleIdentifiers';
 import type { CacheType } from 'discord.js';
 import type { Module } from './Module';
 import type { ModuleCommandDeferOptions, ModuleCommandDisabledMessageFunction, ModuleCommandOptions } from '../types/ModuleCommandTypes';
@@ -8,7 +10,7 @@ export abstract class ModuleCommand<T extends Module = Module> extends Command {
 	/**
 	 * The {@link Module} that this command is associated with
 	 */
-	public readonly module!: T;
+	public readonly module: T;
 
 	/**
 	 * How the precondition should handle deferrals before {@link Module.isEnabled} is run
@@ -29,29 +31,38 @@ export abstract class ModuleCommand<T extends Module = Module> extends Command {
 		const module = store.get(options.module) as T | undefined;
 
 		if (!module) {
-			container.logger.error(
-				`[Modules Plugin]: There was no module found with the name of "${options.module}" for the command "${context.name}" at "${context.path}". Please check that the module is registering properly.`
-			);
-			return;
+			throw new ModuleError({
+				identifier: ModuleIdentifiers.ModuleNotFound,
+				moduleName: options.module,
+				message: `[Modules Plugin] There was no module found with the name of "${options.module}" for the command "${context.name}" at "${context.path}". Please check that the module is registering properly.`
+			});
 		}
 
-		const applyConfigOptions = //
-			module?.config?.commands?.strategy === CommandConfigOptionsStrategy.Global
-				? true
-				: module?.config?.commands?.strategy === CommandConfigOptionsStrategy.None
-				? false
-				: options.applyConfigCommandOptions === true;
+		const config = module.getConfig();
+		let commandOptions: ModuleCommandOptions;
 
-		super(
-			context,
-			applyConfigOptions //
-				? { ...module?.config?.commands?.options, ...options }
-				: { ...options }
-		);
+		if (
+			module.validateConfig(config) &&
+			config.commands?.options &&
+			config.commands.strategy !== undefined &&
+			config.commands.strategy !== CommandConfigOptionsStrategy.None
+		) {
+			if (config.commands.strategy === CommandConfigOptionsStrategy.Overwrite) {
+				commandOptions = { ...options, ...config.commands.options };
+			} else {
+				commandOptions = { ...config.commands.options, ...options };
+			}
+		} else {
+			commandOptions = { ...options };
+		}
+
+		super(context, commandOptions);
 
 		this.module = module;
 		this.deferOptions = options.deferOptions;
 		this.applyConfigCommandOptions = options.applyConfigCommandOptions;
+
+		this.module.commands.set(this.name, this);
 	}
 
 	/**

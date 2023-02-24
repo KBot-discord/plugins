@@ -5,6 +5,8 @@ import type { ModuleConfig } from '../types/ModuleConfig';
 import type { ModuleEnabledPrecondition } from '../../preconditions/ModuleEnabled';
 import type { IsEnabledContext, ModuleOptions } from '../types/ModuleTypes';
 import type { ChatInputModuleCommand } from '../types/ModuleCommandTypes';
+import type { ModuleCommand } from './ModuleCommand';
+import { Collection } from 'discord.js';
 
 /**
  * The module plugin allows you to easily handle settings for batches of commands.
@@ -31,7 +33,7 @@ export abstract class Module<T extends ModuleConfig = ModuleConfig> extends Piec
 	/**
 	 * The {@link ModuleConfig} for this {@link Module}
 	 */
-	public config: T | undefined;
+	protected config: T | undefined;
 
 	/**
 	 * The name that will be displayed to users if this {@link Module} is disabled
@@ -44,8 +46,10 @@ export abstract class Module<T extends ModuleConfig = ModuleConfig> extends Piec
 	public readonly description: string | undefined;
 
 	/**
-	 * Constructor for this instance of the {@link Module} class
+	 * The {@link ModuleCommand}s associated with this module
 	 */
+	public readonly commands = new Collection<string, ModuleCommand>();
+
 	public constructor(context: Module.Context, options: Module.Options) {
 		super(context, { ...options });
 		this.fullName = options.fullName;
@@ -60,11 +64,18 @@ export abstract class Module<T extends ModuleConfig = ModuleConfig> extends Piec
 	public isEnabled?(context: IsEnabledContext): Awaitable<boolean | Result<boolean, ModuleError>>;
 
 	/**
+	 * Gets the {@link ModuleConfig} for this {@link Module}
+	 */
+	public getConfig(): T | undefined {
+		return this.config;
+	}
+
+	/**
 	 * Sets the {@link ModuleConfig} for this {@link Module}
 	 * @param config
 	 */
-	public setConfig(config: T): T {
-		return (this.config = config);
+	public setConfig(config: T): void {
+		this.config = config;
 	}
 
 	/**
@@ -97,8 +108,8 @@ export abstract class Module<T extends ModuleConfig = ModuleConfig> extends Piec
 	 * @param options
 	 * @returns An instance of {@link Result.Err}
 	 */
-	public error(options: Omit<ModuleError.Options, 'module'> = {}): Result.Err<ModuleError> {
-		return Result.err(new ModuleError({ module: this, ...options }));
+	public error(options: Omit<ModuleError.Options, 'module'> = { moduleName: this.fullName }): Result.Err<ModuleError> {
+		return Result.err(new ModuleError({ ...options, module: this }));
 	}
 }
 

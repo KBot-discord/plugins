@@ -11,6 +11,6 @@ export class ModuleListener extends Listener<typeof ModuleEvents.ModuleMissingIs
 
 	public run(module: Module) {
 		const { fullName, location } = module;
-		this.container.logger.error(`[Modules Plugin]: The module "${fullName}" is missing the "isEnabled" handler at path "${location.full}"`);
+		this.container.logger.error(`[Modules Plugin] The module "${fullName}" is missing the "isEnabled" handler at path "${location.full}"`);
 	}
 }
