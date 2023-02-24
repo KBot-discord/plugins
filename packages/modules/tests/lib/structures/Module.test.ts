@@ -1,12 +1,11 @@
 import { describe, test, expect } from 'vitest';
 import { getMockModule } from '../../mocks/mockClient';
-import { ModuleError, ModuleIdentifiers } from '../../../src';
-import type { MockModule } from '../../mocks/modules/MockModule';
+import { Module, ModuleError, ModuleIdentifiers } from '../../../src';
 import { Piece } from '@sapphire/framework';
 import { mockConfig } from '../../mocks/mockConfig';
 
 describe('Module', () => {
-	let module: MockModule;
+	let module: Module;
 
 	beforeEach(() => {
 		module = getMockModule();
@@ -37,6 +36,7 @@ describe('Module', () => {
 		test('GIVEN error(ModuleError.Options) RETURN ModuleError', () => {
 			const error = new ModuleError({
 				module,
+				moduleName: module.name,
 				identifier: ModuleIdentifiers.ModuleMissingIsEnabledHandler
 			});
 
@@ -53,32 +53,32 @@ describe('Module', () => {
 	});
 
 	describe('Module config', () => {
-		test('GIVEN invalid config RETURN false', () => {
-			const currentConfig = module?.config;
-
-			const result = module?.validateConfig(currentConfig);
-
-			expect(result).toStrictEqual(false);
-		});
-
 		test('GIVEN no config RETURN the set config', () => {
-			const result = module?.setConfig(mockConfig);
+			const result = module.setConfig(mockConfig);
 
-			expect(result).toStrictEqual(mockConfig);
+			expect(result).toBe(undefined);
 		});
 
 		test('GIVEN a set config RETURN the config', () => {
-			const result = module?.config;
+			const result = module.getConfig();
 
 			expect(result).toStrictEqual(mockConfig);
 		});
 
+		test('GIVEN invalid config RETURN false', () => {
+			const currentConfig = undefined;
+
+			const result = module.validateConfig(currentConfig);
+
+			expect(result).toBe(false);
+		});
+
 		test('GIVEN valid config RETURN true', () => {
-			const currentConfig = module?.config;
+			const currentConfig = module.getConfig();
 
-			const result = module?.validateConfig(currentConfig);
+			const result = module.validateConfig(currentConfig);
 
-			expect(result).toStrictEqual(true);
+			expect(result).toBe(true);
 		});
 	});
 });

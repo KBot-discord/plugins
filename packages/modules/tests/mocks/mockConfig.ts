@@ -2,7 +2,7 @@ import { CommandConfigOptionsStrategy, ModuleConfig } from '../../src';
 
 export const mockConfig: ModuleConfig = {
 	commands: {
-		strategy: CommandConfigOptionsStrategy.Global,
+		strategy: CommandConfigOptionsStrategy.Overwrite,
 		options: {
 			enabled: false
 		},

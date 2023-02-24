@@ -16,7 +16,7 @@ export class MockModuleCommand extends ModuleCommand<MockModule> {
 
 	public override registerApplicationCommands(registry: ModuleCommand.Registry) {
 		registry.registerChatInputCommand((builder) => builder.setName('ping'), {
-			guildIds: this.module.config?.commands?.guildIds
+			guildIds: this.module.getConfig()?.commands?.guildIds
 		});
 	}
 

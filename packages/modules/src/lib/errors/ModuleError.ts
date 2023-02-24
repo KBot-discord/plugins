@@ -2,10 +2,12 @@ import { UserError } from '@sapphire/framework';
 import type { Module } from '../structures/Module';
 
 export class ModuleError extends UserError {
-	public readonly module: Module;
+	public readonly moduleName: string;
+	public readonly module: Module | undefined;
 
 	public constructor(options: ModuleError.Options) {
-		super({ ...options, identifier: options.identifier ?? options.module.name });
+		super({ ...options, identifier: options.identifier ?? options.moduleName });
+		this.moduleName = options.moduleName;
 		this.module = options.module;
 	}
 
@@ -17,7 +19,8 @@ export class ModuleError extends UserError {
 
 export namespace ModuleError {
 	export interface Options extends Omit<UserError.Options, 'identifier'> {
-		module: Module;
+		moduleName: string;
+		module?: Module;
 		identifier?: string;
 	}
 }
