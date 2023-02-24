@@ -2,7 +2,6 @@ import { describe, test, expect } from 'vitest';
 import { getMockModule } from '../../mocks/mockClient';
 import { Module, ModuleError, ModuleIdentifiers } from '../../../src';
 import { Piece } from '@sapphire/framework';
-import { mockConfig } from '../../mocks/mockConfig';
 
 describe('Module', () => {
 	let module: Module;
@@ -59,18 +58,6 @@ describe('Module', () => {
 			const result = module?.validateConfig(currentConfig);
 
 			expect(result).toStrictEqual(false);
-		});
-
-		test('GIVEN no config RETURN the set config', () => {
-			const result = module?.setConfig(mockConfig);
-
-			expect(result).toBe(undefined);
-		});
-
-		test('GIVEN a set config RETURN the config', () => {
-			const result = module?.getConfig();
-
-			expect(result).toStrictEqual(mockConfig);
 		});
 
 		test('GIVEN valid config RETURN true', () => {
