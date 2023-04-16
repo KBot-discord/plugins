@@ -1,66 +1,66 @@
 {
-  "name": "@kbotdev/plugin-modules",
-  "version": "1.0.6",
-  "description": "Module plugin for the Sapphire Framework",
-  "author": "@kbotdev",
-  "license": "MIT",
-  "main": "dist/index.js",
-  "module": "dist/index.mjs",
-  "types": "dist/index.d.ts",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/KBot-discord/plugins.git",
-    "directory": "packages/modules"
-  },
-  "homepage": "https://github.com/KBot-discord/plugins/tree/main/packages/modules",
-  "dependencies": {
-    "tslib": "^2.5.0"
-  },
-  "devDependencies": {
-    "@microsoft/tsdoc": "^0.14.2",
-    "@vitest/coverage-c8": "^0.29.0",
-    "gen-esm-wrapper": "^1.1.3",
-    "typedoc": "^0.23.25",
-    "typescript": "^4.9.5",
-    "vitest": "^0.29.0"
-  },
-  "engines": {
-    "node": ">=14.x"
-  },
-  "files": [
-    "dist/**/*.js*",
-    "dist/**/*.mjs*",
-    "dist/**/*.d*",
-    "./register.*"
-  ],
-  "exports": {
-    ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js",
-      "types": "./dist/index.d.ts"
-    },
-    "./register": {
-      "import": "./register.mjs",
-      "require": "./register.js",
-      "types": "./register.d.ts"
-    }
-  },
-  "sideEffects": [
-    "./dist/register.js",
-    "./register.js",
-    "./register.mjs"
-  ],
-  "scripts": {
-    "lint": "eslint --fix --ext .ts src",
-    "format": "prettier --write --loglevel=warn \"src/**/*.{js,ts,json}\"",
-    "build": "tsc -b src && yarn esm:register && yarn esm:default",
-    "test:build": "yarn build && tsc -b tests/mocks",
-    "test": "vitest",
-    "esm:register": "gen-esm-wrapper dist/register.js dist/register.mjs",
-    "esm:default": "gen-esm-wrapper dist/index.js dist/index.mjs",
-    "docs": "typedoc .",
-    "ci:lint": "eslint --fix=false --ext .ts src",
-    "ci:test": "tsc -b tests/mocks && vitest run --coverage"
-  },
-  "packageManager": "yarn@3.5.0"
+	"name": "@kbotdev/plugin-modules",
+	"version": "1.0.6",
+	"description": "Module plugin for the Sapphire Framework",
+	"author": "@kbotdev",
+	"license": "MIT",
+	"main": "dist/index.js",
+	"module": "dist/index.mjs",
+	"types": "dist/index.d.ts",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/KBot-discord/plugins.git",
+		"directory": "packages/modules"
+	},
+	"homepage": "https://github.com/KBot-discord/plugins/tree/main/packages/modules",
+	"dependencies": {
+		"tslib": "^2.5.0"
+	},
+	"devDependencies": {
+		"@microsoft/tsdoc": "^0.14.2",
+		"@vitest/coverage-c8": "^0.30.1",
+		"gen-esm-wrapper": "^1.1.3",
+		"typedoc": "^0.24.4",
+		"typescript": "^4.9.5",
+		"vitest": "^0.30.1"
+	},
+	"engines": {
+		"node": ">=14.x"
+	},
+	"files": [
+		"dist/**/*.js*",
+		"dist/**/*.mjs*",
+		"dist/**/*.d*",
+		"./register.*"
+	],
+	"exports": {
+		".": {
+			"import": "./dist/index.mjs",
+			"require": "./dist/index.js",
+			"types": "./dist/index.d.ts"
+		},
+		"./register": {
+			"import": "./register.mjs",
+			"require": "./register.js",
+			"types": "./register.d.ts"
+		}
+	},
+	"sideEffects": [
+		"./dist/register.js",
+		"./register.js",
+		"./register.mjs"
+	],
+	"scripts": {
+		"lint": "eslint --fix --ext .ts src",
+		"format": "prettier --write --loglevel=warn \"src/**/*.{js,ts,json}\"",
+		"build": "tsc -b src && yarn esm:register && yarn esm:default",
+		"test:build": "yarn build && tsc -b tests/mocks",
+		"test": "vitest",
+		"esm:register": "gen-esm-wrapper dist/register.js dist/register.mjs",
+		"esm:default": "gen-esm-wrapper dist/index.js dist/index.mjs",
+		"docs": "typedoc .",
+		"ci:lint": "eslint --fix=false --ext .ts src",
+		"ci:test": "tsc -b tests/mocks && vitest run --coverage"
+	},
+	"packageManager": "yarn@3.5.0"
 }

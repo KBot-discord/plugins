@@ -1,25 +1,25 @@
 {
-  "$schema": "https://turbo.build/schema.json",
-  "pipeline": {
-    "build": {
-      "dependsOn": ["^build"],
-      "outputs": ["dist/**"]
-    },
-    "test": {
-      "dependsOn": ["build"],
-      "outputs": ["coverage/**"]
-    },
-    "test:build": {},
-    "docs": {
-      "dependsOn": ["build"],
-      "outputs": ["docs/**"]
-    },
-    "lint": {},
-    "format": {},
-    "ci:lint": {},
-    "ci:test": {
-      "dependsOn": ["build"],
-      "outputs": ["coverage/**"]
-    }
-  }
+	"$schema": "https://turbo.build/schema.json",
+	"pipeline": {
+		"build": {
+			"dependsOn": ["^build"],
+			"outputs": ["dist/**"]
+		},
+		"test": {
+			"dependsOn": ["build"],
+			"outputs": ["coverage/**"]
+		},
+		"test:build": {},
+		"docs": {
+			"dependsOn": ["build"],
+			"outputs": ["docs/**"]
+		},
+		"lint": {},
+		"format": {},
+		"ci:lint": {},
+		"ci:test": {
+			"dependsOn": ["build"],
+			"outputs": ["coverage/**"]
+		}
+	}
 }

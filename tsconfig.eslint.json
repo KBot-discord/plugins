@@ -6,6 +6,6 @@
 		"packages/**/register*.js",
 		"packages/**/register*.mjs",
 		"packages/**/types*.js",
-		"packages/**/types*.mjs",
+		"packages/**/types*.mjs"
 	]
 }
