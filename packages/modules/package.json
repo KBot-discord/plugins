@@ -1,6 +1,6 @@
 {
 	"name": "@kbotdev/plugin-modules",
-	"version": "1.0.6",
+	"version": "1.0.7",
 	"description": "Module plugin for the Sapphire Framework",
 	"author": "@kbotdev",
 	"license": "MIT",
