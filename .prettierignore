@@ -1,3 +1,10 @@
-.turbo
+.git*
+.husky/
+.idea/
+.turbo/
 dist/
+docs/
 coverage/
+node_modules/
+.yarn/
+yarn.lock
