@@ -1,4 +1,4 @@
-import { Result, Piece } from '@sapphire/framework';
+import { Result } from '@sapphire/framework';
 import { ModuleError } from '../errors/ModuleError';
 import type { Awaitable } from '@sapphire/framework';
 import type { ModuleConfig } from '../types/ModuleConfig';
@@ -29,7 +29,7 @@ import { Collection } from 'discord.js';
  * }
  *
  */
-export abstract class Module<T extends ModuleConfig = ModuleConfig> extends Piece<ModuleOptions> {
+export abstract class Module<T extends ModuleConfig = ModuleConfig> {
 	/**
 	 * The {@link ModuleConfig} for this {@link Module}
 	 */
@@ -50,8 +50,7 @@ export abstract class Module<T extends ModuleConfig = ModuleConfig> extends Piec
 	 */
 	public readonly commands = new Collection<string, ModuleCommand>();
 
-	public constructor(context: Module.Context, options: Module.Options) {
-		super(context, { ...options });
+	public constructor(options: ModuleOptions) {
 		this.fullName = options.fullName;
 		this.description = options.description;
 	}
@@ -115,6 +114,5 @@ export abstract class Module<T extends ModuleConfig = ModuleConfig> extends Piec
 
 export namespace Module {
 	export type Options = ModuleOptions;
-	export type Context = Piece.Context;
 	export type Command = ChatInputModuleCommand;
 }
