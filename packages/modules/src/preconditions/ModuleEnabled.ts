@@ -29,16 +29,6 @@ export class ModuleEnabledPrecondition extends Precondition {
 		const { client } = this.container;
 		const { module } = command;
 
-		if (command.deferOptions?.defer === true && (!interaction.replied || !interaction.deferred)) {
-			const deferResult = await Result.fromAsync(async () => {
-				await interaction.deferReply({ ephemeral: command.deferOptions?.ephemeral });
-				return module.ok();
-			});
-			if (deferResult.isErr()) {
-				client.emit(ModuleEvents.ModuleError, deferResult.unwrapErr(), module, { interaction, command, result: deferResult });
-			}
-		}
-
 		const result = await Result.fromAsync(async () => {
 			if (module.isEnabled) {
 				const data = await module.isEnabled({ guild: interaction.guild, interaction, command });

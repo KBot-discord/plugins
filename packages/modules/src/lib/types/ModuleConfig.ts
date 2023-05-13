@@ -4,7 +4,7 @@ import type { Guild } from 'discord.js';
 /**
  * The different strategies for applying the {@link CommandOptions} in the {@link ModuleConfig}
  */
-export enum CommandConfigOptionsStrategy {
+export enum CommandOptionsStrategy {
 	/** @param Overwrite Prioritizes the command options set in the {@link ModuleConfig} */
 	Overwrite,
 	/** @param Default Prioritizes the command options set in {@link ModuleCommandOptions} */
@@ -21,7 +21,7 @@ export interface ModuleConfig {
 		/**
 		 * How command options should be resolved.
 		 */
-		strategy?: CommandConfigOptionsStrategy;
+		strategy?: CommandOptionsStrategy;
 
 		/**
 		 * The {@link CommandOptions} to apply

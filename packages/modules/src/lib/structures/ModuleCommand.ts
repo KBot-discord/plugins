@@ -1,10 +1,9 @@
-import { Command, container } from '@sapphire/framework';
-import { CommandConfigOptionsStrategy } from '../types/ModuleConfig';
-import { ModuleError } from '../errors/ModuleError';
-import { ModuleIdentifiers } from '../errors/ModuleIdentifiers';
+import { Command, CommandOptions } from '@sapphire/framework';
+import { CommandOptionsStrategy } from '../types/ModuleConfig';
+import type { PieceContext } from '@sapphire/framework';
 import type { CacheType } from 'discord.js';
 import type { Module } from './Module';
-import type { ModuleCommandDeferOptions, ModuleCommandDisabledMessageFunction, ModuleCommandOptions } from '../types/ModuleCommandTypes';
+import type { ModuleCommandDisabledMessageFunction } from '../types/ModuleCommandTypes';
 
 export abstract class ModuleCommand<T extends Module = Module> extends Command {
 	/**
@@ -13,41 +12,22 @@ export abstract class ModuleCommand<T extends Module = Module> extends Command {
 	public readonly module: T;
 
 	/**
-	 * How the precondition should handle deferrals before {@link Module.isEnabled} is run
-	 */
-	public readonly deferOptions: ModuleCommandDeferOptions | undefined;
-
-	/**
-	 * If the command options from {@link Module.config} should be applied to the command
-	 * @default false
-	 */
-	public readonly applyConfigCommandOptions: boolean | undefined;
-
-	/**
 	 * Constructor for this instance of the {@link ModuleCommand} class
+	 * @param context The {@link PieceContext} to pass to the {@link ModuleCommand}
+	 * @param options The {@link ModuleCommandOptions} to pass to the {@link ModuleCommand}
+	 * @param module The {@link Module} that this command is associated with
 	 */
-	public constructor(context: ModuleCommand.Context, options: ModuleCommand.Options) {
-		const store = container.stores.get('modules');
-		const module = store.get(options.module) as T | undefined;
-
-		if (!module) {
-			throw new ModuleError({
-				identifier: ModuleIdentifiers.ModuleNotFound,
-				moduleName: options.module,
-				message: `[Modules Plugin] There was no module found with the name of "${options.module}" for the command "${context.name}" at "${context.path}". Please check that the module is registering properly.`
-			});
-		}
-
+	public constructor(context: ModuleCommand.Context, options: ModuleCommand.Options, module: T) {
 		const config = module.getConfig();
-		let commandOptions: ModuleCommandOptions;
+		let commandOptions: CommandOptions;
 
 		if (
 			module.validateConfig(config) &&
 			config.commands?.options &&
 			config.commands.strategy !== undefined &&
-			config.commands.strategy !== CommandConfigOptionsStrategy.None
+			config.commands.strategy !== CommandOptionsStrategy.None
 		) {
-			if (config.commands.strategy === CommandConfigOptionsStrategy.Overwrite) {
+			if (config.commands.strategy === CommandOptionsStrategy.Overwrite) {
 				commandOptions = { ...options, ...config.commands.options };
 			} else {
 				commandOptions = { ...config.commands.options, ...options };
@@ -59,8 +39,6 @@ export abstract class ModuleCommand<T extends Module = Module> extends Command {
 		super(context, commandOptions);
 
 		this.module = module;
-		this.deferOptions = options.deferOptions;
-		this.applyConfigCommandOptions = options.applyConfigCommandOptions;
 
 		this.module.commands.set(this.name, this);
 	}
@@ -75,7 +53,7 @@ export abstract class ModuleCommand<T extends Module = Module> extends Command {
 }
 
 export namespace ModuleCommand {
-	export type Options = ModuleCommandOptions;
+	export type Options = Command.Options;
 	export type JSON = Command.JSON;
 	export type Context = Command.Context;
 	export type RunInTypes = Command.RunInTypes;
