@@ -1,12 +1,44 @@
 {
 	"name": "@kbotdev/plugin-modules",
-	"version": "1.0.7",
+	"version": "2.0.0-alpha.1",
 	"description": "Module plugin for the Sapphire Framework",
 	"author": "@kbotdev",
 	"license": "MIT",
 	"main": "dist/index.js",
 	"module": "dist/index.mjs",
 	"types": "dist/index.d.ts",
+	"exports": {
+		".": {
+			"import": "./dist/index.mjs",
+			"require": "./dist/index.js",
+			"types": "./dist/index.d.ts"
+		},
+		"./register": {
+			"import": "./register.mjs",
+			"require": "./register.js",
+			"types": "./register.d.ts"
+		}
+	},
+	"files": [
+		"dist/**/*.js*",
+		"dist/**/*.mjs*",
+		"dist/**/*.d*",
+		"./register.*"
+	],
+	"sideEffects": [
+		"./dist/register.js",
+		"./register.js",
+		"./register.mjs"
+	],
+	"scripts": {
+		"lint": "eslint --fix --ext .ts src",
+		"format": "prettier --write --loglevel=warn \"src/**/*.{js,ts,json}\"",
+		"build": "tsc -b src && yarn esm:register && yarn esm:default",
+		"esm:register": "gen-esm-wrapper dist/register.js dist/register.mjs",
+		"esm:default": "gen-esm-wrapper dist/index.js dist/index.mjs",
+		"docs": "typedoc .",
+		"ci:lint": "eslint --fix=false --ext .ts src"
+	},
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/KBot-discord/plugins.git",
@@ -24,38 +56,5 @@
 	},
 	"engines": {
 		"node": ">=14.x"
-	},
-	"files": [
-		"dist/**/*.js*",
-		"dist/**/*.mjs*",
-		"dist/**/*.d*",
-		"./register.*"
-	],
-	"exports": {
-		".": {
-			"import": "./dist/index.mjs",
-			"require": "./dist/index.js",
-			"types": "./dist/index.d.ts"
-		},
-		"./register": {
-			"import": "./register.mjs",
-			"require": "./register.js",
-			"types": "./register.d.ts"
-		}
-	},
-	"sideEffects": [
-		"./dist/register.js",
-		"./register.js",
-		"./register.mjs"
-	],
-	"scripts": {
-		"lint": "eslint --fix --ext .ts src",
-		"format": "prettier --write --loglevel=warn \"src/**/*.{js,ts,json}\"",
-		"build": "tsc -b src && yarn esm:register && yarn esm:default",
-		"esm:register": "gen-esm-wrapper dist/register.js dist/register.mjs",
-		"esm:default": "gen-esm-wrapper dist/index.js dist/index.mjs",
-		"docs": "typedoc .",
-		"ci:lint": "eslint --fix=false --ext .ts src"
-	},
-	"packageManager": "yarn@3.5.0"
+	}
 }

@@ -2,6 +2,8 @@ import { UserError } from '@sapphire/framework';
 import type { Module } from '../structures/Module';
 
 export class ModuleError extends UserError {
+	private readonly _name = 'ModuleError';
+
 	public readonly moduleName: string;
 	public readonly module: Module | undefined;
 
@@ -11,9 +13,8 @@ export class ModuleError extends UserError {
 		this.module = options.module;
 	}
 
-	// eslint-disable-next-line @typescript-eslint/class-literal-property-style
-	public override get name(): string {
-		return 'ModuleError';
+	public get name() {
+		return this._name;
 	}
 }
 

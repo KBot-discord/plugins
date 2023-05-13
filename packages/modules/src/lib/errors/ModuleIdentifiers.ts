@@ -1,6 +1,3 @@
 export const enum ModuleIdentifiers {
-	ModuleDisabled = 'moduleDisabled',
-	ModuleMissingConfig = 'moduleMissingConfig',
-	ModuleMissingIsEnabledHandler = 'moduleMissingIsEnabledHandler',
-	ModuleNotFound = 'moduleNotFound'
+	ModuleMissingIsEnabledHandler = 'moduleMissingIsEnabledHandler'
 }
