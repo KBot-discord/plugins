@@ -31,8 +31,8 @@
 		"./register.mjs"
 	],
 	"scripts": {
-		"lint": "eslint --fix --ext ts src",
-		"lint:fix": "eslint --ext ts src",
+		"lint": "eslint --ext ts src",
+		"lint:fix": "eslint --fix --ext ts src",
 		"format": "prettier --write --loglevel=warn \"src/**/*.{js,ts,json}\"",
 		"build": "tsc -b src && yarn esm:register && yarn esm:default",
 		"esm:register": "gen-esm-wrapper dist/register.js dist/register.mjs",
