@@ -31,12 +31,12 @@
 		"./register.mjs"
 	],
 	"scripts": {
-		"lint": "eslint --fix --ext .ts src",
+		"lint": "eslint --fix --ext ts src",
+		"lint:fix": "eslint --ext ts src",
 		"format": "prettier --write --loglevel=warn \"src/**/*.{js,ts,json}\"",
 		"build": "tsc -b src && yarn esm:register && yarn esm:default",
 		"esm:register": "gen-esm-wrapper dist/register.js dist/register.mjs",
-		"esm:default": "gen-esm-wrapper dist/index.js dist/index.mjs",
-		"ci:lint": "eslint --fix=false --ext .ts src"
+		"esm:default": "gen-esm-wrapper dist/index.js dist/index.mjs"
 	},
 	"repository": {
 		"type": "git",

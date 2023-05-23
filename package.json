@@ -7,8 +7,8 @@
 	"scripts": {
 		"build": "turbo run build",
 		"test": "turbo run ci:test",
-		"test:build": "turbo run test:build",
-		"lint": "turbo run ci:lint",
+		"lint": "turbo run lint",
+		"lint:fix": "turbo run lint:fix",
 		"format": "turbo run format"
 	},
 	"devDependencies": {

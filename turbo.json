@@ -17,10 +17,10 @@
 		"lint": {
 			"dependsOn": ["build"]
 		},
-		"format": {
+		"lint:fix": {
 			"dependsOn": ["build"]
 		},
-		"ci:lint": {
+		"format": {
 			"dependsOn": ["build"]
 		}
 	}
