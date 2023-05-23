@@ -1,8 +1,17 @@
 import './index';
 import { join } from 'path';
-import { Plugin, postInitialization, SapphireClient } from '@sapphire/framework';
+import { Plugin, postInitialization, preInitialization, SapphireClient } from '@sapphire/framework';
+import { ModuleStore } from './lib/structures/ModuleStore';
 
 export class ModulesPlugin extends Plugin {
+	public static [preInitialization](this: SapphireClient): void {
+		const { options, stores } = this;
+
+		if (options.modules?.enabled !== false) {
+			stores.register(new ModuleStore());
+		}
+	}
+
 	public static [postInitialization](this: SapphireClient): void {
 		const { options, stores } = this;
 
@@ -16,4 +25,5 @@ export class ModulesPlugin extends Plugin {
 	}
 }
 
+SapphireClient.plugins.registerPreInitializationHook(ModulesPlugin[preInitialization], 'Module-PreInitialization');
 SapphireClient.plugins.registerPostInitializationHook(ModulesPlugin[postInitialization], 'Module-PostInitialization');

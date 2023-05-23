@@ -1,12 +1,8 @@
-import { Result } from '@sapphire/framework';
-import { ModuleError } from '../errors/ModuleError';
+import { Piece, Result } from '@sapphire/framework';
+import { ModuleError, type ModuleErrorOptions } from '../errors/ModuleError';
 import type { Awaitable } from '@sapphire/framework';
-import type { ModuleConfig } from '../types/ModuleConfig';
 import type { ModuleEnabledPrecondition } from '../../preconditions/ModuleEnabled';
 import type { IsEnabledContext, ModuleOptions } from '../types/ModuleTypes';
-import type { ChatInputModuleCommand } from '../types/ModuleCommandTypes';
-import type { ModuleCommand } from './ModuleCommand';
-import { Collection } from 'discord.js';
 
 /**
  * The module plugin allows you to easily handle settings for batches of commands.
@@ -29,12 +25,7 @@ import { Collection } from 'discord.js';
  * }
  *
  */
-export abstract class Module<T extends ModuleConfig = ModuleConfig> {
-	/**
-	 * The {@link ModuleConfig} for this {@link Module}
-	 */
-	protected config: T | undefined;
-
+export abstract class Module extends Piece {
 	/**
 	 * The name that will be displayed to users if this {@link Module} is disabled
 	 */
@@ -45,12 +36,9 @@ export abstract class Module<T extends ModuleConfig = ModuleConfig> {
 	 */
 	public readonly description: string | undefined;
 
-	/**
-	 * The {@link ModuleCommand}s associated with this module
-	 */
-	public readonly commands = new Collection<string, ModuleCommand>();
+	public constructor(context: Module.Context, options: Module.Options) {
+		super(context, options);
 
-	public constructor(options: ModuleOptions) {
 		this.fullName = options.fullName;
 		this.description = options.description;
 	}
@@ -61,30 +49,6 @@ export abstract class Module<T extends ModuleConfig = ModuleConfig> {
 	 * @returns If this {@link Module} is enabled
 	 */
 	public isEnabled?(context: IsEnabledContext): Awaitable<boolean | Result<boolean, ModuleError>>;
-
-	/**
-	 * Gets the {@link ModuleConfig} for this {@link Module}
-	 */
-	public getConfig(): T | undefined {
-		return this.config;
-	}
-
-	/**
-	 * Sets the {@link ModuleConfig} for this {@link Module}
-	 * @param config
-	 */
-	public setConfig(config: T): void {
-		this.config = config;
-	}
-
-	/**
-	 * Validates if the {@link ModuleConfig} is undefined or not
-	 * @param config The {@link ModuleConfig} to validate
-	 * @return If the {@link ModuleConfig} is valid
-	 */
-	public validateConfig(config: T | undefined): config is T {
-		return config !== undefined;
-	}
 
 	/**
 	 *
@@ -107,12 +71,12 @@ export abstract class Module<T extends ModuleConfig = ModuleConfig> {
 	 * @param options
 	 * @returns An instance of {@link Result.Err}
 	 */
-	public error(options: Omit<ModuleError.Options, 'module'> = { moduleName: this.fullName }): Result.Err<ModuleError> {
+	public error(options: Omit<ModuleErrorOptions, 'module'> = { moduleName: this.fullName }): Result.Err<ModuleError> {
 		return Result.err(new ModuleError({ ...options, module: this }));
 	}
 }
 
 export namespace Module {
 	export type Options = ModuleOptions;
-	export type Command = ChatInputModuleCommand;
+	export type Context = Piece.Context;
 }

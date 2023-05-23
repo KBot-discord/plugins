@@ -9,7 +9,7 @@ export class ModuleListener extends Listener<typeof ModuleEvents.ModuleMissingIs
 		});
 	}
 
-	public run(module: Module) {
+	public run(module: Module): void {
 		const { fullName } = module;
 		this.container.logger.error(`[Modules Plugin] The module "${fullName}" is missing the "isEnabled" handler`);
 	}
