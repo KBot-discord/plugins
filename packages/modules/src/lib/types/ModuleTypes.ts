@@ -1,3 +1,4 @@
+import type { Piece } from '@sapphire/framework';
 import type { Guild } from 'discord.js';
 import type { ModuleCommandInteractionUnion, ModuleCommandUnion } from './ModuleCommandTypes';
 
@@ -24,7 +25,7 @@ export interface IsEnabledContext {
 /**
  * The options for the {@link Module}
  */
-export interface ModuleOptions {
+export interface ModuleOptions extends Piece.Options {
 	/**
 	 * The name that will be displayed to users if the {@link Module} is disabled
 	 */

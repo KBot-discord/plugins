@@ -1,15 +1,21 @@
-import { Precondition, Result } from '@sapphire/framework';
+import { Precondition, Result, UserError } from '@sapphire/framework';
 import { ModuleEvents } from '../lib/types/ModuleEvents';
 import { ModuleIdentifiers } from '../lib/errors/ModuleIdentifiers';
-import type { Piece } from '@sapphire/framework';
-import type { ModuleCommandInteractionUnion, ChatInputModuleCommand, ContextMenuModuleCommand } from '../lib/types/ModuleCommandTypes';
+import type {
+	ModuleCommandInteractionUnion,
+	ChatInputModuleCommand,
+	ContextMenuModuleCommand,
+	MessageModuleCommand,
+	ModuleCommandUnion
+} from '../lib/types/ModuleCommandTypes';
+import type { Message } from 'discord.js';
 
 export class ModuleEnabledPrecondition extends Precondition {
-	public constructor(context: Piece.Context, options: Precondition.Options) {
-		super(context, { ...options });
-	}
-
-	public override async chatInputRun(interaction: ModuleCommandInteractionUnion, command: ChatInputModuleCommand, context: Precondition.Context) {
+	public override async chatInputRun(
+		interaction: ModuleCommandInteractionUnion,
+		command: ChatInputModuleCommand,
+		context: Precondition.Context
+	): Promise<Result<unknown, UserError>> {
 		return this.run(interaction, command, context);
 	}
 
@@ -17,15 +23,23 @@ export class ModuleEnabledPrecondition extends Precondition {
 		interaction: ModuleCommandInteractionUnion,
 		command: ContextMenuModuleCommand,
 		context: Precondition.Context
-	) {
+	): Promise<Result<unknown, UserError>> {
 		return this.run(interaction, command, context);
+	}
+
+	public override async messageRun(
+		message: Message, //
+		command: MessageModuleCommand,
+		context: Precondition.Context
+	): Promise<Result<unknown, UserError>> {
+		return this.run(message, command, context);
 	}
 
 	private async run(
 		interaction: ModuleCommandInteractionUnion,
-		command: ChatInputModuleCommand | ContextMenuModuleCommand,
+		command: ModuleCommandUnion,
 		_context: Precondition.Context
-	) {
+	): Promise<Result<unknown, UserError>> {
 		const { client } = this.container;
 		const { module } = command;
 
@@ -38,10 +52,11 @@ export class ModuleEnabledPrecondition extends Precondition {
 				}
 
 				const result = typeof data === 'boolean' ? data : data.unwrap();
-
 				return module.ok(result);
 			}
+
 			client.emit(ModuleEvents.ModuleMissingIsEnabledHandler, module, { interaction, command });
+
 			return module.error({
 				identifier: ModuleIdentifiers.ModuleMissingIsEnabledHandler,
 				moduleName: module.fullName,
@@ -55,12 +70,18 @@ export class ModuleEnabledPrecondition extends Precondition {
 					client.emit(ModuleEvents.ModuleError, error, module, { interaction, command, result });
 				}
 			});
+
 			return this.error({
-				message: `[${module.fullName}] Something went wrong while handling this request.`
+				message: command.errorMessage(module.fullName, command.name)
 			});
 		}
 
-		if (result.unwrap()) return this.ok();
-		return this.error({ message: command.disabledMessage(module.fullName, command.name) });
+		if (result.unwrap()) {
+			return this.ok();
+		}
+
+		return this.error({
+			message: command.disabledMessage(module.fullName, command.name)
+		});
 	}
 }

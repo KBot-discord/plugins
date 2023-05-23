@@ -9,7 +9,7 @@ export class ModuleListener extends Listener<typeof ModuleEvents.ModuleError> {
 		});
 	}
 
-	public run(error: any, module: Module, _context: ModuleErrorContext) {
+	public run(error: any, module: Module, _context: ModuleErrorContext): void {
 		const { fullName } = module;
 		this.container.logger.error(`[Modules Plugin] There was an error in module "${fullName}"\n`, error);
 	}

@@ -3,7 +3,7 @@
 	"compilerOptions": {
 		"rootDir": "./",
 		"outDir": "../dist",
-		"composite": false,
+		"composite": true,
 		"preserveConstEnums": true,
 		"tsBuildInfoFile": "../dist/.tsbuildinfo"
 	},

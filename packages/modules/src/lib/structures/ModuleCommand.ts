@@ -1,59 +1,64 @@
-import { Command, CommandOptions } from '@sapphire/framework';
-import { CommandOptionsStrategy } from '../types/ModuleConfig';
+import { Command } from '@sapphire/framework';
+import { ModuleNotFoundError } from '../errors/ModuleNotFoundError';
 import type { PieceContext } from '@sapphire/framework';
 import type { CacheType } from 'discord.js';
 import type { Module } from './Module';
-import type { ModuleCommandDisabledMessageFunction } from '../types/ModuleCommandTypes';
+import type { ModuleCommandMessageFunction, ModuleCommandOptions } from '../types/ModuleCommandTypes';
+import type { Modules } from './ModuleStore';
 
 export abstract class ModuleCommand<T extends Module = Module> extends Command {
-	/**
-	 * The {@link Module} that this command is associated with
-	 */
-	public readonly module: T;
+	private readonly moduleName: string;
 
 	/**
 	 * Constructor for this instance of the {@link ModuleCommand} class
 	 * @param context The {@link PieceContext} to pass to the {@link ModuleCommand}
 	 * @param options The {@link ModuleCommandOptions} to pass to the {@link ModuleCommand}
-	 * @param module The {@link Module} that this command is associated with
 	 */
-	public constructor(context: ModuleCommand.Context, options: ModuleCommand.Options, module: T) {
-		const config = module.getConfig();
-		let commandOptions: CommandOptions;
+	public constructor(context: ModuleCommand.Context, options: ModuleCommand.Options) {
+		super(context, options);
 
-		if (
-			module.validateConfig(config) &&
-			config.commands?.options &&
-			config.commands.strategy !== undefined &&
-			config.commands.strategy !== CommandOptionsStrategy.None
-		) {
-			if (config.commands.strategy === CommandOptionsStrategy.Overwrite) {
-				commandOptions = { ...options, ...config.commands.options };
-			} else {
-				commandOptions = { ...config.commands.options, ...options };
-			}
-		} else {
-			commandOptions = { ...options };
+		this.moduleName = options.module;
+	}
+
+	/**
+	 * The {@link Module} that this command is associated with
+	 */
+	public get module(): T {
+		const store = this.container.stores.get('modules');
+		const module = store.get(this.moduleName as keyof Modules);
+
+		if (!module) {
+			throw new ModuleNotFoundError({ moduleName: this.moduleName });
 		}
 
-		super(context, commandOptions);
-
-		this.module = module;
-
-		this.module.commands.set(this.name, this);
+		return module as T;
 	}
 
 	/**
 	 * The message that will be shown to users if the associated {@link Module} is disabled
 	 */
-	public disabledMessage: (moduleName: string, commandName: string) => string = ModuleCommand.disabledMessage;
+	public disabledMessage: ModuleCommandMessageFunction = ModuleCommand.DisabledMessage;
 
-	public static disabledMessage: ModuleCommandDisabledMessageFunction = //
+	/**
+	 * The message that will be shown to users if the associated {@link Module.isEnabled} functions throws an error
+	 */
+	public errorMessage: ModuleCommandMessageFunction = ModuleCommand.ErrorMessage;
+
+	/**
+	 * The default disabled message
+	 */
+	public static DisabledMessage: ModuleCommandMessageFunction = //
 		(moduleFullName: string) => `[${moduleFullName}] The module for this command is disabled.`;
+
+	/**
+	 * The default error message
+	 */
+	public static ErrorMessage: ModuleCommandMessageFunction = //
+		(moduleFullName: string) => `[${moduleFullName}] Something went wrong while handling this request.`;
 }
 
 export namespace ModuleCommand {
-	export type Options = Command.Options;
+	export type Options = ModuleCommandOptions;
 	export type JSON = Command.JSON;
 	export type Context = Command.Context;
 	export type RunInTypes = Command.RunInTypes;
