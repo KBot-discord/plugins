@@ -1,5 +1,5 @@
-import { Listener } from '@sapphire/framework';
 import { ModuleEvents } from '../lib/types/ModuleEvents';
+import { Listener } from '@sapphire/framework';
 import type { Module } from '../lib/structures/Module';
 
 export class ModuleListener extends Listener<typeof ModuleEvents.ModuleMissingIsEnabledHandler> {

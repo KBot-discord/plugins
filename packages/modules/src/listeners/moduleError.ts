@@ -1,5 +1,5 @@
+import { ModuleEvents } from '../lib/types/ModuleEvents';
 import { Listener } from '@sapphire/framework';
-import { type ModuleErrorContext, ModuleEvents } from '../lib/types/ModuleEvents';
 import type { Module } from '../lib/structures/Module';
 
 export class ModuleListener extends Listener<typeof ModuleEvents.ModuleError> {
@@ -9,7 +9,7 @@ export class ModuleListener extends Listener<typeof ModuleEvents.ModuleError> {
 		});
 	}
 
-	public run(error: any, module: Module, _context: ModuleErrorContext): void {
+	public run(error: unknown, module: Module): void {
 		const { fullName } = module;
 		this.container.logger.error(`[Modules Plugin] There was an error in module "${fullName}"\n`, error);
 	}

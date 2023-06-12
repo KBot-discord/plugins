@@ -21,4 +21,4 @@ export type MessageModuleCommand<M extends Module = Module> = ModuleCommand<M> &
 
 export type ModuleCommandUnion<M extends Module = Module> = ChatInputModuleCommand<M> | ContextMenuModuleCommand<M> | MessageModuleCommand<M>;
 
-export type ModuleCommandInteractionUnion = ModuleCommand.ChatInputCommandInteraction | ModuleCommand.ContextMenuCommandInteraction | Message;
+export type ModuleCommandInteractionUnion = Message | ModuleCommand.ChatInputCommandInteraction | ModuleCommand.ContextMenuCommandInteraction;

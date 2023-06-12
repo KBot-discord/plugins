@@ -1,13 +1,13 @@
 export interface ModulePluginOptions {
 	/**
 	 * If the plugin should be enabled.
-	 * @default true
+	 * @defaultValue true
 	 */
 	enabled?: boolean;
 
 	/**
 	 * If the default module error listeners should be enabled or not.
-	 * @default true
+	 * @defaultValue true
 	 */
 	loadModuleErrorListeners?: boolean;
 }
