@@ -1,5 +1,6 @@
+import { ModuleError } from '../errors/ModuleError';
 import { Piece, Result } from '@sapphire/framework';
-import { ModuleError, type ModuleErrorOptions } from '../errors/ModuleError';
+import type { ModuleErrorOptions } from '../errors/ModuleError';
 import type { Awaitable } from '@sapphire/framework';
 import type { ModuleEnabledPrecondition } from '../../preconditions/ModuleEnabled';
 import type { IsEnabledContext, ModuleOptions } from '../types/ModuleTypes';
@@ -7,9 +8,10 @@ import type { IsEnabledContext, ModuleOptions } from '../types/ModuleTypes';
 /**
  * The module plugin allows you to easily handle settings for batches of commands.
  *
- * @remark One pattern might be to have `isEnabled` fetch guild-specific settings from a database, and then return true or false if the command should be run.
+ * @remarks One pattern might be to have `isEnabled` fetch guild-specific settings from a database, and then return true or false if the command should be run.
  *
  * @example
+ * ```ts
  * export class ExampleModule extends Module {
  * 		public constructor(context: Module.Context, options: Piece.Options) {
  * 			super(context, {
@@ -23,7 +25,7 @@ import type { IsEnabledContext, ModuleOptions } from '../types/ModuleTypes';
  *         	return true;
  *     	}
  * }
- *
+ * ```
  */
 export abstract class Module extends Piece {
 	/**
@@ -45,10 +47,10 @@ export abstract class Module extends Piece {
 
 	/**
 	 *
-	 * @param context The context that will be passed from {@link ModuleEnabledPrecondition}
+	 * @param context - The context that will be passed from {@link ModuleEnabledPrecondition}
 	 * @returns If this {@link Module} is enabled
 	 */
-	public isEnabled?(context: IsEnabledContext): Awaitable<boolean | Result<boolean, ModuleError>>;
+	public isEnabled?(context: IsEnabledContext): Awaitable<Result<boolean, ModuleError> | boolean>;
 
 	/**
 	 *
@@ -58,17 +60,17 @@ export abstract class Module extends Piece {
 
 	/**
 	 *
-	 * @param result The result you want to return
+	 * @param result - The result you want to return
 	 * @returns An instance of {@link Result.Ok}
 	 */
 	public ok<R>(result: R): Result.Ok<R>;
-	public ok<R = undefined>(result?: R) {
+	public ok<R = undefined>(result?: R): Result.Ok<R | undefined> {
 		return Result.ok(result);
 	}
 
 	/**
 	 * Create a formatted {@link ModuleError}
-	 * @param options
+	 * @param options - The options to pass to the error
 	 * @returns An instance of {@link Result.Err}
 	 */
 	public error(options: Omit<ModuleErrorOptions, 'module'> = { moduleName: this.fullName }): Result.Err<ModuleError> {

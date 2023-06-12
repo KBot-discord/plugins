@@ -1,4 +1,7 @@
 {
 	"extends": "./tsconfig.base.json",
-	"include": ["packages/**/*.ts", "packages/**/*.mjs"]
+	"compilerOptions": {
+		"noEmit": true
+	},
+	"include": ["packages/**/*.ts", ".eslintrc.cjs"]
 }

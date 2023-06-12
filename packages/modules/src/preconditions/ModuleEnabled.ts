@@ -1,11 +1,12 @@
-import { Precondition, Result, UserError } from '@sapphire/framework';
 import { ModuleEvents } from '../lib/types/ModuleEvents';
 import { ModuleIdentifiers } from '../lib/errors/ModuleIdentifiers';
+import { Precondition, Result } from '@sapphire/framework';
+import type { UserError } from '@sapphire/framework';
 import type {
-	ModuleCommandInteractionUnion,
 	ChatInputModuleCommand,
 	ContextMenuModuleCommand,
 	MessageModuleCommand,
+	ModuleCommandInteractionUnion,
 	ModuleCommandUnion
 } from '../lib/types/ModuleCommandTypes';
 import type { Message } from 'discord.js';
@@ -13,33 +14,26 @@ import type { Message } from 'discord.js';
 export class ModuleEnabledPrecondition extends Precondition {
 	public override async chatInputRun(
 		interaction: ModuleCommandInteractionUnion,
-		command: ChatInputModuleCommand,
-		context: Precondition.Context
+		command: ChatInputModuleCommand
 	): Promise<Result<unknown, UserError>> {
-		return this.run(interaction, command, context);
+		return this.run(interaction, command);
 	}
 
 	public override async contextMenuRun(
 		interaction: ModuleCommandInteractionUnion,
-		command: ContextMenuModuleCommand,
-		context: Precondition.Context
+		command: ContextMenuModuleCommand
 	): Promise<Result<unknown, UserError>> {
-		return this.run(interaction, command, context);
+		return this.run(interaction, command);
 	}
 
 	public override async messageRun(
 		message: Message, //
-		command: MessageModuleCommand,
-		context: Precondition.Context
+		command: MessageModuleCommand
 	): Promise<Result<unknown, UserError>> {
-		return this.run(message, command, context);
+		return this.run(message, command);
 	}
 
-	private async run(
-		interaction: ModuleCommandInteractionUnion,
-		command: ModuleCommandUnion,
-		_context: Precondition.Context
-	): Promise<Result<unknown, UserError>> {
+	private async run(interaction: ModuleCommandInteractionUnion, command: ModuleCommandUnion): Promise<Result<unknown, UserError>> {
 		const { client } = this.container;
 		const { module } = command;
 

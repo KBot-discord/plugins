@@ -1,6 +1,7 @@
 {
-	"extends": "@sapphire/ts-config",
+	"extends": "@kbotdev/ts-config",
 	"compilerOptions": {
+		"module": "Node16",
 		"importHelpers": true,
 		"noEmitHelpers": true
 	}

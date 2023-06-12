@@ -1,5 +1,5 @@
-import { Command } from '@sapphire/framework';
 import { ModuleNotFoundError } from '../errors/ModuleNotFoundError';
+import { Command } from '@sapphire/framework';
 import type { PieceContext } from '@sapphire/framework';
 import type { CacheType } from 'discord.js';
 import type { Module } from './Module';
@@ -11,8 +11,8 @@ export abstract class ModuleCommand<T extends Module = Module> extends Command {
 
 	/**
 	 * Constructor for this instance of the {@link ModuleCommand} class
-	 * @param context The {@link PieceContext} to pass to the {@link ModuleCommand}
-	 * @param options The {@link ModuleCommandOptions} to pass to the {@link ModuleCommand}
+	 * @param context - The {@link PieceContext} to pass to the {@link ModuleCommand}
+	 * @param options - The {@link ModuleCommandOptions} to pass to the {@link ModuleCommand}
 	 */
 	public constructor(context: ModuleCommand.Context, options: ModuleCommand.Options) {
 		super(context, options);
@@ -35,16 +35,6 @@ export abstract class ModuleCommand<T extends Module = Module> extends Command {
 	}
 
 	/**
-	 * The message that will be shown to users if the associated {@link Module} is disabled
-	 */
-	public disabledMessage: ModuleCommandMessageFunction = ModuleCommand.DisabledMessage;
-
-	/**
-	 * The message that will be shown to users if the associated {@link Module.isEnabled} functions throws an error
-	 */
-	public errorMessage: ModuleCommandMessageFunction = ModuleCommand.ErrorMessage;
-
-	/**
 	 * The default disabled message
 	 */
 	public static DisabledMessage: ModuleCommandMessageFunction = //
@@ -55,6 +45,18 @@ export abstract class ModuleCommand<T extends Module = Module> extends Command {
 	 */
 	public static ErrorMessage: ModuleCommandMessageFunction = //
 		(moduleFullName: string) => `[${moduleFullName}] Something went wrong while handling this request.`;
+
+	/**
+	 * The message that will be shown to users if the associated {@link Module} is disabled
+	 */
+	// eslint-disable-next-line @typescript-eslint/member-ordering
+	public disabledMessage: ModuleCommandMessageFunction = ModuleCommand.DisabledMessage;
+
+	/**
+	 * The message that will be shown to users if the associated {@link Module.isEnabled} functions throws an error
+	 */
+	// eslint-disable-next-line @typescript-eslint/member-ordering
+	public errorMessage: ModuleCommandMessageFunction = ModuleCommand.ErrorMessage;
 }
 
 export namespace ModuleCommand {

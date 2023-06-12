@@ -1,12 +1,12 @@
+import { ModuleIdentifiers } from './ModuleIdentifiers';
 import { UserError } from '@sapphire/framework';
 import type { Module } from '../structures/Module';
-import { ModuleIdentifiers } from './ModuleIdentifiers';
 
 export class ModuleError extends UserError {
-	private readonly _name: string;
-
 	public readonly moduleName: string;
 	public readonly module: Module | undefined;
+
+	private readonly _name: string;
 
 	public constructor(options: ModuleErrorOptions) {
 		super({ ...options, identifier: options.identifier ?? ModuleIdentifiers.ModuleError });
@@ -16,7 +16,7 @@ export class ModuleError extends UserError {
 		this.module = options.module;
 	}
 
-	public override get name() {
+	public override get name(): string {
 		return this._name;
 	}
 }

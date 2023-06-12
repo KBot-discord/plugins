@@ -1,7 +1,7 @@
 import './index';
-import { join } from 'path';
-import { Plugin, postInitialization, preInitialization, SapphireClient } from '@sapphire/framework';
 import { ModuleStore } from './lib/structures/ModuleStore';
+import { Plugin, SapphireClient, postInitialization, preInitialization } from '@sapphire/framework';
+import { join } from 'path';
 
 export class ModulesPlugin extends Plugin {
 	public static [preInitialization](this: SapphireClient): void {
