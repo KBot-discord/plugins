@@ -1,4 +1,5 @@
 import 'tslib';
+import '@sapphire/plugin-subcommands/register';
 
 import type { Module } from './lib/structures/Module';
 import type { ModuleStore } from './lib/structures/ModuleStore';

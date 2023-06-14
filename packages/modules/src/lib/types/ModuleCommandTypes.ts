@@ -3,8 +3,16 @@ import type { Message } from 'discord.js';
 import type { Module } from '../structures/Module';
 import type { ModuleCommand } from '../structures/ModuleCommand';
 import type { Modules } from '../structures/ModuleStore';
+import type { Subcommand } from '@sapphire/plugin-subcommands';
 
 export interface ModuleCommandOptions extends Command.Options {
+	/**
+	 * The {@link Module} that this command is associated with
+	 */
+	module: keyof Modules;
+}
+
+export interface ModuleSubcommandOptions extends Subcommand.Options {
 	/**
 	 * The {@link Module} that this command is associated with
 	 */
