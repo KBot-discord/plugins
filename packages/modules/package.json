@@ -45,9 +45,12 @@
 	},
 	"homepage": "https://github.com/KBot-discord/plugins/tree/main/packages/modules",
 	"dependencies": {
+		"@sapphire/plugin-subcommands": "^4.0.1",
 		"tslib": "^2.5.3"
 	},
 	"devDependencies": {
+		"@sapphire/framework": "^4.4.4",
+		"discord.js": "^14.11.0",
 		"gen-esm-wrapper": "^1.1.3",
 		"typescript": "^5.1.3"
 	},
