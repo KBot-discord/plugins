@@ -1,4 +1,4 @@
-.git*
+.git/
 .husky/
 .idea/
 .turbo/

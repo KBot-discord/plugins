@@ -1,8 +1,12 @@
 {
 	"extends": "@kbotdev/ts-config",
 	"compilerOptions": {
-		"module": "Node16",
+		"lib": ["ESNext"],
+		"module": "ES2022",
+		"moduleResolution": "Bundler",
+		"target": "ES2022",
 		"importHelpers": true,
-		"noEmitHelpers": true
+		"noEmitHelpers": true,
+		"incremental": false
 	}
 }
