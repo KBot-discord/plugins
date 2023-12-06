@@ -2,6 +2,7 @@ import { ModuleError } from '../errors/ModuleError';
 import { Piece, Result } from '@sapphire/framework';
 import type { ModuleErrorOptions } from '../errors/ModuleError';
 import type { Awaitable } from '@sapphire/framework';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import type { ModuleEnabledPrecondition } from '../../preconditions/ModuleEnabled';
 import type { IsEnabledContext, ModuleOptions } from '../types/ModuleTypes';
 

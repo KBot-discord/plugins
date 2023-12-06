@@ -1,4 +1,5 @@
 import './index';
+
 import { ModuleStore } from './lib/structures/ModuleStore';
 import { Plugin, SapphireClient, postInitialization, preInitialization } from '@sapphire/framework';
 import { join } from 'path';
@@ -18,7 +19,7 @@ export class ModulesPlugin extends Plugin {
 		if (options.modules?.enabled !== false) {
 			stores.get('preconditions').registerPath(join(__dirname, 'preconditions'));
 
-			if (options.modules?.loadModuleErrorListeners !== false) {
+			if (options.modules.loadModuleErrorListeners !== false) {
 				stores.get('listeners').registerPath(join(__dirname, 'listeners'));
 			}
 		}

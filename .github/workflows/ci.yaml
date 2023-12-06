@@ -1,10 +1,9 @@
 name: CI
 
 on:
-  push:
-    branches:
-      - main
   pull_request:
+    paths-ignore:
+      - "**/*.md"
 
 permissions:
   contents: read
@@ -14,16 +13,16 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  lint:
+  checks:
     name: Lint
     runs-on: ubuntu-latest
 
     steps:
       - name: Check out Git repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up NodeJS
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: yarn
@@ -34,77 +33,5 @@ jobs:
       - name: Run lint
         run: yarn lint
 
-  build:
-    name: Build
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Check out Git repository
-        uses: actions/checkout@v3
-
-      - name: Set up NodeJS
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20
-          cache: yarn
-
-      - name: Install dependencies
-        run: yarn --immutable
-
       - name: Run build
         run: yarn build
-
-#  test:
-#    name: Test
-#    runs-on: ubuntu-latest
-
-#    strategy:
-#      fail-fast: false
-
-#    steps:
-#      - name: Check out Git repository
-#        uses: actions/checkout@v3
-
-#      - name: Set up NodeJS
-#        uses: actions/setup-node@v3
-#        with:
-#          node-version: 20
-#          cache: yarn
-
-#      - name: Install dependencies
-#        run: yarn --immutable
-
-#      - name: Run tests
-#        run: |
-#          yarn test:build
-#          yarn test
-
-  #    - name: Save coverage report
-  #      uses: actions/upload-artifact@v3
-  #      with:
-  #        name: nodejs-coverage
-  #        path: coverage/
-
-  #coverage:
-  #  name: Coverage
-  #  needs: test
-  #  runs-on: ubuntu-latest
-
-  #  steps:
-  #    - name: Check out Git repository
-  #      uses: actions/checkout@v3
-  #      with:
-  #        fetch-depth: 2
-
-  #    - name: Download NodeJS Unit Test Coverage report
-  #      uses: actions/download-artifact@v3
-  #      with:
-  #        name: nodejs-coverage
-  #        path: coverage/
-
-  #    - name: Codecov upload
-  #      uses: codecov/codecov-action@v3.1.1
-  #      with:
-  #        token: ${{ secrets.CODECOV_TOKEN }}
-  #        directory: coverage/
-  #        fail_ci_if_error: true

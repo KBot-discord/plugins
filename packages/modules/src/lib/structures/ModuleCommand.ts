@@ -1,6 +1,7 @@
 import { ModuleNotFoundError } from '../errors/ModuleNotFoundError';
 import { Command } from '@sapphire/framework';
-import type { PieceContext } from '@sapphire/framework';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import type { LoaderPieceContext } from '@sapphire/framework';
 import type { CacheType } from 'discord.js';
 import type { Module } from './Module';
 import type { ModuleCommandMessageFunction, ModuleCommandOptions } from '../types/ModuleCommandTypes';
@@ -11,10 +12,10 @@ export abstract class ModuleCommand<T extends Module = Module> extends Command {
 
 	/**
 	 * Constructor for this instance of the {@link ModuleCommand} class
-	 * @param context - The {@link PieceContext} to pass to the {@link ModuleCommand}
+	 * @param context - The {@link LoaderPieceContext} to pass to the {@link ModuleCommand}
 	 * @param options - The {@link ModuleCommandOptions} to pass to the {@link ModuleCommand}
 	 */
-	public constructor(context: ModuleCommand.Context, options: ModuleCommand.Options) {
+	public constructor(context: ModuleCommand.LoaderContext, options: ModuleCommand.Options) {
 		super(context, options);
 
 		this.moduleName = options.module;
@@ -62,7 +63,7 @@ export abstract class ModuleCommand<T extends Module = Module> extends Command {
 export namespace ModuleCommand {
 	export type Options = ModuleCommandOptions;
 	export type JSON = Command.JSON;
-	export type Context = Command.Context;
+	export type LoaderContext = Command.LoaderContext;
 	export type RunInTypes = Command.RunInTypes;
 	export type ChatInputCommandInteraction<Cached extends CacheType = CacheType> = Command.ChatInputCommandInteraction<Cached>;
 	export type ContextMenuCommandInteraction<Cached extends CacheType = CacheType> = Command.ContextMenuCommandInteraction<Cached>;

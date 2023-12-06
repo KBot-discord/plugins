@@ -2,6 +2,8 @@
 
 # KBot Modules Plugin
 
+**Plugin for [@sapphire/framework](https://github.com/sapphiredev/framework) to group commands and features into modules.**
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/KBot-discord/plugins/blob/main/LICENSE)
 
 [![npm](https://img.shields.io/npm/v/@kbotdev/plugin-modules?color=crimson&logo=npm&label=@kbotdev/plugin-modules)](https://www.npmjs.com/package/@kbotdev/plugin-modules)
@@ -11,8 +13,7 @@
 
 ## Description
 
-A common design of Discord bots is to separate functionality into distinct domains (such as moderation, server management, etc.). Every command that
-is registered to a module will have access to that module, and by extension any properties/methods exposed in that module.
+This plugin allows developers to seperate commands and features into distinct modules, as well as allow them to be dynamically enabled and disabled.
 
 ## Installation
 

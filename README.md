@@ -12,4 +12,4 @@ Repository that holds all of KBot's Sapphire Plugins.
 
 ### Packages
 
--   [Modules](packages/modules)
+- [Modules](packages/modules)

@@ -1,6 +1,7 @@
 import 'tslib';
 import '@sapphire/plugin-subcommands/register';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import type { Module } from './lib/structures/Module';
 import type { ModuleStore } from './lib/structures/ModuleStore';
 import type { ModulePluginOptions } from './lib/types/ModulePluginOptions';
