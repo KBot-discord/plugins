@@ -1,6 +1,7 @@
 import { ModuleNotFoundError } from '../errors/ModuleNotFoundError';
 import { Subcommand } from '@sapphire/plugin-subcommands';
-import type { PieceContext } from '@sapphire/framework';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import type { LoaderPieceContext } from '@sapphire/framework';
 import type { CacheType } from 'discord.js';
 import type { Module } from './Module';
 import type { ModuleCommandMessageFunction, ModuleSubcommandOptions } from '../types/ModuleCommandTypes';
@@ -11,10 +12,10 @@ export abstract class ModuleSubcommand<T extends Module = Module> extends Subcom
 
 	/**
 	 * Constructor for this instance of the {@link ModuleSubcommand} class
-	 * @param context - The {@link PieceContext} to pass to the {@link ModuleSubcommand}
+	 * @param context - The {@link LoaderPieceContext} to pass to the {@link ModuleSubcommand}
 	 * @param options - The {@link ModuleSubcommandOptions} to pass to the {@link ModuleSubcommand}
 	 */
-	public constructor(context: ModuleSubcommand.Context, options: ModuleSubcommand.Options) {
+	public constructor(context: ModuleSubcommand.LoaderContext, options: ModuleSubcommand.Options) {
 		super(context, options);
 
 		this.moduleName = options.module;
@@ -62,7 +63,7 @@ export abstract class ModuleSubcommand<T extends Module = Module> extends Subcom
 export namespace ModuleSubcommand {
 	export type Options = ModuleSubcommandOptions;
 	export type JSON = Subcommand.JSON;
-	export type Context = Subcommand.Context;
+	export type LoaderContext = Subcommand.LoaderContext;
 	export type RunInTypes = Subcommand.RunInTypes;
 	export type ChatInputCommandInteraction<Cached extends CacheType = CacheType> = Subcommand.ChatInputCommandInteraction<Cached>;
 	export type ContextMenuCommandInteraction<Cached extends CacheType = CacheType> = Subcommand.ContextMenuCommandInteraction<Cached>;
