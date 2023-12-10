@@ -1,8 +1,6 @@
-import './index';
-
+import { loadListeners, loadPreconditions } from './index';
 import { ModuleStore } from './lib/structures/ModuleStore';
 import { Plugin, SapphireClient, postInitialization, preInitialization } from '@sapphire/framework';
-import { join } from 'path';
 
 export class ModulesPlugin extends Plugin {
 	public static [preInitialization](this: SapphireClient): void {
@@ -14,13 +12,13 @@ export class ModulesPlugin extends Plugin {
 	}
 
 	public static [postInitialization](this: SapphireClient): void {
-		const { options, stores } = this;
+		const { options } = this;
 
 		if (options.modules?.enabled !== false) {
-			stores.get('preconditions').registerPath(join(__dirname, 'preconditions'));
+			loadPreconditions();
 
-			if (options.modules.loadModuleErrorListeners !== false) {
-				stores.get('listeners').registerPath(join(__dirname, 'listeners'));
+			if (options.modules?.loadModuleErrorListeners !== false) {
+				loadListeners();
 			}
 		}
 	}
