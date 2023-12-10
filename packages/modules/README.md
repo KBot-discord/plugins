@@ -25,6 +25,10 @@ npm install @kbotdev/plugin-modules @sapphire/framework discord.js
 
 If you are already using the [Subcommand plugin](https://github.com/sapphiredev/plugins/tree/main/packages/subcommands), make sure you do **NOT** manually register the subcommand plugin. This plugin already registers it due to the dependency.
 
+## Examples
+
+An example implementation can be found in KBot's repo: https://github.com/KBot-discord/KBot/tree/main/apps/bot/src/modules
+
 ## Usage
 
 Modules are loaded from the `modules` directory.
