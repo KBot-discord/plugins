@@ -14,7 +14,7 @@ import type { IsEnabledContext, ModuleOptions } from '../types/ModuleTypes';
  * @example
  * ```ts
  * export class ExampleModule extends Module {
- * 		public constructor(context: Module.Context, options: Piece.Options) {
+ * 		public constructor(context: Module.LoaderContext, options: Piece.Options) {
  * 			super(context, {
  *          	...options,
  *             	fullName: 'Example Module',
@@ -39,7 +39,7 @@ export abstract class Module extends Piece {
 	 */
 	public readonly description: string | undefined;
 
-	public constructor(context: Module.Context, options: Module.Options) {
+	public constructor(context: Module.LoaderContext, options: Module.Options) {
 		super(context, options);
 
 		this.fullName = options.fullName;
@@ -81,5 +81,5 @@ export abstract class Module extends Piece {
 
 export namespace Module {
 	export type Options = ModuleOptions;
-	export type Context = Piece.Context;
+	export type LoaderContext = Piece.LoaderContext;
 }

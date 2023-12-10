@@ -21,9 +21,9 @@ This plugin allows developers to seperate commands and features into distinct mo
 npm install @kbotdev/plugin-modules @sapphire/framework discord.js
 ```
 
-## Examples
+## Subcommand plugin compatibility
 
-Work in progress
+If you are already using the [Subcommand plugin](https://github.com/sapphiredev/plugins/tree/main/packages/subcommands), make sure you do **NOT** manually register the subcommand plugin. This plugin already registers it due to the dependency.
 
 ## Usage
 
@@ -43,7 +43,7 @@ import { Module, type IsEnabledContext, type ModuleError } from '@kbotdev/plugin
 import type { Piece, Result } from '@sapphire/framework';
 
 export class ExampleModule extends Module {
-	public constructor(context: Module.Context, options: Piece.Options) {
+	public constructor(context: Module.LoaderContext, options: Piece.Options) {
 		super(context, {
 			...options,
 			// The name of the module that a user would see
@@ -59,8 +59,8 @@ export class ExampleModule extends Module {
 	// Or async
 	public async isEnabled(context: IsEnabledContext): Promise<boolean> {
 		try {
-			await SomethingThatMightError();
-			return true;
+			const data = await getGuildSettings(context.guild?.id);
+			return data.enabled;
 		} catch {
 			return false;
 		}
@@ -89,7 +89,7 @@ import type { Command } from '@sapphire/framework';
 import type { ExampleModule } from '../modules/ExampleModule';
 
 export class ExampleCommand extends ModuleCommand<ExampleModule> {
-	public constructor(context: ModuleCommand.Context, options: Command.Options) {
+	public constructor(context: ModuleCommand.LoaderContext, options: Command.Options) {
 		super(context, {
 			...options,
 
@@ -97,7 +97,7 @@ export class ExampleCommand extends ModuleCommand<ExampleModule> {
 			module: 'ExampleModule',
 			description: 'An awesome description.',
 
-			// A precondition that calls the 'isEnabled' function
+			// A precondition that calls the 'isEnabled' function on ExampleModule
 			preconditions: ['ModuleEnabled']
 		});
 	}
