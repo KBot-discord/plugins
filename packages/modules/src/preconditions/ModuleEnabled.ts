@@ -16,21 +16,21 @@ export class ModuleEnabledPrecondition extends Precondition {
 		interaction: ModuleCommandInteractionUnion,
 		command: ChatInputModuleCommand
 	): Promise<Result<unknown, UserError>> {
-		return this.run(interaction, command);
+		return await this.run(interaction, command);
 	}
 
 	public override async contextMenuRun(
 		interaction: ModuleCommandInteractionUnion,
 		command: ContextMenuModuleCommand
 	): Promise<Result<unknown, UserError>> {
-		return this.run(interaction, command);
+		return await this.run(interaction, command);
 	}
 
 	public override async messageRun(
 		message: Message, //
 		command: MessageModuleCommand
 	): Promise<Result<unknown, UserError>> {
-		return this.run(message, command);
+		return await this.run(message, command);
 	}
 
 	private async run(interaction: ModuleCommandInteractionUnion, command: ModuleCommandUnion): Promise<Result<unknown, UserError>> {
@@ -65,16 +65,16 @@ export class ModuleEnabledPrecondition extends Precondition {
 				}
 			});
 
-			return this.error({
+			return await this.error({
 				message: command.errorMessage(module.fullName, command.name)
 			});
 		}
 
 		if (result.unwrap()) {
-			return this.ok();
+			return await this.ok();
 		}
 
-		return this.error({
+		return await this.error({
 			message: command.disabledMessage(module.fullName, command.name)
 		});
 	}
