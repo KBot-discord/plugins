@@ -655,7 +655,7 @@ __metadata:
   dependencies:
     "@favware/rollup-type-bundler": "npm:^3.2.1"
     "@sapphire/framework": "npm:^5.0.5"
-    "@sapphire/plugin-subcommands": "npm:^6.0.2"
+    "@sapphire/plugin-subcommands": "npm:^7.0.0"
     concurrently: "npm:^8.2.2"
     discord.js: "npm:^14.14.1"
     tslib: "npm:^2.6.2"
@@ -959,13 +959,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sapphire/plugin-subcommands@npm:^6.0.2":
-  version: 6.0.2
-  resolution: "@sapphire/plugin-subcommands@npm:6.0.2"
+"@sapphire/plugin-subcommands@npm:^7.0.0":
+  version: 7.0.0
+  resolution: "@sapphire/plugin-subcommands@npm:7.0.0"
   dependencies:
-    "@sapphire/utilities": "npm:^3.15.1"
-    tslib: "npm:^2.6.2"
-  checksum: d96f5e4ed08353af595db757713d3750d38981cb358677489553b1821e6c316d3c36221f7b647d6ff54e06b29e2b19682d3e4f8ec3d10f8d50ddc1930059b00b
+    "@sapphire/utilities": "npm:^3.17.0"
+  checksum: 55dcd8d1ed0be2d9f486619fbbb1967ca24f1580692a719b4ebc3a44e3d6b219a097d17aa32cf79641cffdb1ab51d4f74502c32ea18e62bed245b1c6bc03ede8
   languageName: node
   linkType: hard
 
@@ -1016,10 +1015,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sapphire/utilities@npm:^3.13.0, @sapphire/utilities@npm:^3.14.0, @sapphire/utilities@npm:^3.15.1":
+"@sapphire/utilities@npm:^3.13.0, @sapphire/utilities@npm:^3.14.0":
   version: 3.15.2
   resolution: "@sapphire/utilities@npm:3.15.2"
   checksum: c8b1e28c4b400850df2e9b278ff81cb5bb0a18bb158ce8a7e03b504405ab1a6ad9b884190c5b54c07c3c18644d42e1f6e6fa6b5c2bac9d5396589c3781c72008
+  languageName: node
+  linkType: hard
+
+"@sapphire/utilities@npm:^3.17.0":
+  version: 3.17.0
+  resolution: "@sapphire/utilities@npm:3.17.0"
+  checksum: cfdf604be06e1e4f7fd26f10c198586eef9012001b83dcc8178886d88145334db06e164725aadf5bfb065b39ecdefaa8286c695576e7674b5a3bc9280ce02e0d
   languageName: node
   linkType: hard
 
