@@ -54,7 +54,7 @@
 	},
 	"homepage": "https://github.com/KBot-discord/plugins/tree/main/packages/modules",
 	"dependencies": {
-		"@sapphire/plugin-subcommands": "^6.0.2",
+		"@sapphire/plugin-subcommands": "^7.0.0",
 		"tslib": "^2.6.2"
 	},
 	"devDependencies": {
