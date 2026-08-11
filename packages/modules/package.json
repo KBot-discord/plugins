@@ -58,7 +58,7 @@
 		"tslib": "^2.6.2"
 	},
 	"devDependencies": {
-		"@favware/rollup-type-bundler": "^3.2.1",
+		"@favware/rollup-type-bundler": "^4.0.0",
 		"@sapphire/framework": "^5.0.5",
 		"concurrently": "^8.2.2",
 		"discord.js": "^14.14.1",
