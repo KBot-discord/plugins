@@ -16,7 +16,7 @@
 	"devDependencies": {
 		"@commitlint/cli": "^18.4.4",
 		"@commitlint/config-conventional": "^18.4.4",
-		"@favware/rollup-type-bundler": "^3.2.1",
+		"@favware/rollup-type-bundler": "^4.0.0",
 		"@kbotdev/eslint-config": "^2.0.1",
 		"@kbotdev/prettier-config": "^1.0.2",
 		"@kbotdev/ts-config": "^1.0.2",
